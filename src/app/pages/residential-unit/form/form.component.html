@@ -1,17 +1,57 @@
-<div class="modal" tabindex="-1" id="modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Nuevo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
+<div class="modal-header">
+  <h4 class="modal-title">{{ modalTitle }}</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
+</div>
+<div class="modal-body mb-3">
+        <form autocomplete="off" [formGroup]="unidadResidencial">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre">
+          </div>
+          <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" formControlName="direccion">
+          </div>
+          <div class="mb-3">
+            <label for="pais" class="form-label">País</label>
+            <input type="text" class="form-control" id="pais" formControlName="pais">
+          </div>
+          <div class="mb-3">
+            <label for="departamento" class="form-label">Departamento</label>
+            <input type="text" class="form-control" id="departamento" formControlName="departamento">
+          </div>
+          <div class="mb-3">
+            <label for="ciudad" class="form-label">Ciudad</label>
+            <input type="text" class="form-control" id="ciudad" formControlName="ciudad">
+          </div>
+          <div class="mb-3">
+            <label for="codigoPostal" class="form-label">Código Postal</label>
+            <input type="number" class="form-control" id="codigoPostal" formControlName="codigoPostal">
+          </div>
+          <div class="mb-3">
+            <label for="telefonoAdmon" class="form-label">Teléfono Administración</label>
+            <input type="number" class="form-control" id="telefonoAdmon" formControlName="telefonoAdmon">
+          </div>
+          <div class="mb-3">
+            <label for="emailAdmon" class="form-label">Email Administración</label>
+            <input type="email" class="form-control" id="emailAdmon" formControlName="emailAdmon">
+          </div>
+          <div class="mb-3">
+            <label for="empresaVigilancia" class="form-label">Empresa de Vigilancia</label>
+            <input type="text" class="form-control" id="empresaVigilancia" formControlName="empresaVigilancia">
+          </div>
+          <div class="mb-3">
+            <label for="nitEmpresaVigilancia" class="form-label">Nit de Empresa de Vigilancia</label>
+            <input type="text" class="form-control" id="nitEmpresaVigilancia" formControlName="nitEmpresaVigilancia">
+          </div>
+          <div class="mb-3">
+            <label for="registroInmobiliario" class="form-label">Registro Inmobiliario</label>
+            <input type="text" class="form-control" id="registroInmobiliario" formControlName="registroInmobiliario">
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-outline-dark" [disabled]="unidadResidencial.invalid" (click)="onSave()">
+          Guardar
+        </button>
       </div>
-    </div>
-  </div>
-</div>
