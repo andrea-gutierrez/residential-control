@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ modalTitle }}</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
+</div>
+<div class="modal-body mb-3">
+  <form [formGroup]="unidadResidencialAdmon">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nombre" formControlName="nombre">
+    </div>
+    <div class="mb-3">
+      <label for="apellido" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="apellido" formControlName="apellido">
+    </div>
+    <div class="mb-3">
+      <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
+      <select class="form-control" id="tipoDocumento" formControlName="tipoDocumento">
+        <option selected>Selecciona un tipo de documento</option>
+        <option value="cc">Cédula de ciudadanía</option>
+        <option value="cedulaExtranjeria">Cédula de extranjería</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="documento" class="form-label">Documento</label>
+      <input type="text" class="form-control" id="documento" formControlName="documento">
+    </div>
+    <div class="mb-3">
+      <label for="celular" class="form-label">Celular</label>
+      <input type="number" class="form-control" id="celular" formControlName="celular">
+    </div>
+    <div class="mb-3">
+      <label for="usuario" class="form-label">Usuario</label>
+      <input type="text" class="form-control" id="usuario" formControlName="usuario">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" id="password" formControlName="password">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Emaill</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" [disabled]="unidadResidencialAdmon.invalid" (click)="onSave()">
+    Guardar
+  </button>
+</div>
