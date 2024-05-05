@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { FormComponent } from './form/form.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, inject} from '@angular/core';
+import {FormComponent} from './form/form.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {UnidadResidencial} from "./residentialUnit.interface";
 import {NgForOf} from "@angular/common";
+import {Router} from "@angular/router";
 
-@Component( {
+@Component({
   selector: 'app-residential-unit',
   standalone: true,
   imports: [
@@ -13,9 +14,10 @@ import {NgForOf} from "@angular/common";
   ],
   templateUrl: './residential-unit.component.html',
   styleUrl: './residential-unit.component.scss'
-} )
+})
 export class ResidentialUnitComponent {
-  private modalService = inject( NgbModal );
+  private modalService = inject(NgbModal);
+  private router = inject(Router);
 
   public residentList: UnidadResidencial[] = [
     {
@@ -34,34 +36,38 @@ export class ResidentialUnitComponent {
     }
   ];
 
-  onOpenModal( action: string, unidadResidencialData?: UnidadResidencial ) {
-    const modalTitle = this.getModalTitle( action );
+  onOpenModal(action: string, unidadResidencialData?: UnidadResidencial) {
+    const modalTitle = this.getModalTitle(action);
 
-    const modalRef = this.modalService.open( FormComponent, {
+    const modalRef = this.modalService.open(FormComponent, {
       size: 'lg',
-    } );
+    });
 
     modalRef.componentInstance.modalTitle = modalTitle;
     modalRef.componentInstance.unidadResidencialData = unidadResidencialData ?? null;
     modalRef.result.then((unidadResidencial?: UnidadResidencial) => {
       console.log('result', unidadResidencial);
-      if(unidadResidencial) {
+      if (unidadResidencial) {
         this.residentList.push(unidadResidencial);
       }
     })
   }
 
   onDelete(id: string): void {
-    const residentIndex = this.residentList.findIndex( resident => resident.id === id );
+    const residentIndex = this.residentList.findIndex(resident => resident.id === id);
     this.residentList.splice(residentIndex, 1);
   }
 
-  getModalTitle( action: string ): string {
-    switch ( action ) {
+  getModalTitle(action: string): string {
+    switch (action) {
       case 'edit':
         return 'Editar'
       default:
         return 'Nuevo';
     }
+  }
+
+  goToView(): void {
+    this.router.navigate(['residential-admons']);
   }
 }
