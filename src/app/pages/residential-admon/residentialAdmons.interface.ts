@@ -1,9 +1,9 @@
-export interface UnidadResidencialAdmons {
+export interface ResidentialUnitAdmins {
   nombre: string;
   apellido: string;
   tipoDocumento: string;
   documento: string;
-  celular: number;
+  celular: string;
   usuario: string;
   password: string;
   email: string;

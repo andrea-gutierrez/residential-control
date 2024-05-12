@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {FormComponent} from "./form/form.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {UnidadResidencialAdmons} from "./residentialAdmons.interface";
+import {ResidentialUnitAdmins} from "./residentialAdmons.interface";
 import {NgForOf} from "@angular/common";
 
 @Component({
@@ -16,11 +16,11 @@ import {NgForOf} from "@angular/common";
 export class ResidentialAdmonsComponent {
   private modalService = inject(NgbModal);
 
-  public residentialUnitAdmonList: UnidadResidencialAdmons[] = [
+  public residentialUnitAdmonList: ResidentialUnitAdmins[] = [
     {
       email: 'cataguirales@gmail.com',
       id: 'fdsjkfj323423432',
-      celular: 312345345,
+      celular: '312345345',
       documento: '323432423',
       apellido: 'Guirales',
       nombre: 'Catalina',
@@ -30,7 +30,7 @@ export class ResidentialAdmonsComponent {
     }
   ];
 
-  onOpenModal(action: string, unidadResidencialAdmonData?: UnidadResidencialAdmons) {
+  onOpenModal(action: string, unidadResidencialAdmonData?: ResidentialUnitAdmins) {
     const modalTitle = this.getModalTitle(action);
 
     const modalRef = this.modalService.open(FormComponent, {
@@ -39,8 +39,7 @@ export class ResidentialAdmonsComponent {
 
     modalRef.componentInstance.modalTitle = modalTitle;
     modalRef.componentInstance.unidadResidencialAdmonData = unidadResidencialAdmonData ?? null;
-    modalRef.result.then((unidadResidencialAdmon?: UnidadResidencialAdmons) => {
-      console.log('result', unidadResidencialAdmon);
+    modalRef.result.then((unidadResidencialAdmon?: ResidentialUnitAdmins) => {
       if (unidadResidencialAdmon) {
         this.residentialUnitAdmonList.push(unidadResidencialAdmon);
       }
@@ -50,9 +49,9 @@ export class ResidentialAdmonsComponent {
   getModalTitle(action: string): string {
     switch (action) {
       case 'edit':
-        return 'Editar'
+        return 'Editar Administrador'
       default:
-        return 'Nuevo';
+        return 'Nuevo Administrador';
     }
   }
 
