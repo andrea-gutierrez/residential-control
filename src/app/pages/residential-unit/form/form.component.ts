@@ -32,7 +32,7 @@ export class FormComponent implements OnInit{
     if( this.unidadResidencialData ) {
       this.unidadResidencial.patchValue({
         ...this.unidadResidencialData as any
-      })
+      });
     }
   }
 

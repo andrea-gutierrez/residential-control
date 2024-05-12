@@ -5,7 +5,7 @@ import {UnidadResidencialAdmons} from "./residentialAdmons.interface";
 import {NgForOf} from "@angular/common";
 
 @Component({
-  selector: 'app-residential-admons',
+  selector: 'app-residential-admon',
   standalone: true,
   templateUrl: './residential-admons.component.html',
   imports: [
