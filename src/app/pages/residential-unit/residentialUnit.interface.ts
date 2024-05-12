@@ -1,24 +1,18 @@
 import {FormControl} from '@angular/forms';
 
-export interface UnidadResidencial {
+export interface ResidentialUnit {
   nombre: string;
-  direccion: string;
+  address: string;
   pais: string;
   ciudad: string;
   departamento: string;
-  codigoPostal: number;
-  telefonoAdmon: number;
-  emailAdmon: string;
+  zoneCode: string;
+  mobileAdmin: string;
+  emailAdmin: string;
   empresaVigilancia: string;
   nitEmpresaVigilancia: string;
   registroInmobiliario: string;
   id: string;
 }
 
-export type UnidadResidencialDTO = Omit<UnidadResidencial, "id">
-
-type ToFormControls<T> = {
-  [K in keyof T]: FormControl<T[K]>;
-};
-
-export type UnidadResidencialForm = ToFormControls<UnidadResidencialDTO>;
+export type UnidadResidencialDTO = Omit<ResidentialUnit, "id">

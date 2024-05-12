@@ -1,42 +1,40 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormComponent} from './form/form.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {UnidadResidencial} from "./residentialUnit.interface";
+import {ResidentialUnit} from "./residentialUnit.interface";
 import {NgForOf} from "@angular/common";
 import {Router} from "@angular/router";
+import {ResidentialUnitService} from "./residential-unit.service";
 
 @Component({
   selector: 'app-residential-unit',
   standalone: true,
   imports: [
     FormComponent,
-    NgForOf
+    NgForOf,
+  ],
+  providers: [
+    ResidentialUnitService,
   ],
   templateUrl: './residential-unit.component.html',
   styleUrl: './residential-unit.component.scss'
 })
-export class ResidentialUnitComponent {
+export class ResidentialUnitComponent implements OnInit{
   private modalService = inject(NgbModal);
   private router = inject(Router);
 
-  public residentList: UnidadResidencial[] = [
-    {
-      emailAdmon: 'unidad_orinoco@gmail.com',
-      registroInmobiliario: '#####',
-      telefonoAdmon: 2131231,
-      empresaVigilancia: 'Jesus Andres',
-      ciudad: 'Medellin',
-      codigoPostal: 324323,
-      id: 'jldf32rjlks',
-      departamento: 'Antioquia',
-      direccion: 'cra 33',
-      nitEmpresaVigilancia: '3423dfs',
-      nombre: 'Orinoco de la cuenca',
-      pais: 'Colombia',
-    }
-  ];
+  private residentialUnitService = inject(ResidentialUnitService);
 
-  onOpenModal(action: string, unidadResidencialData?: UnidadResidencial) {
+  public residentList: ResidentialUnit[] = [];
+
+  ngOnInit() {
+    this.residentialUnitService.getAll().subscribe((data: any) => {
+      console.log(data)
+      this.residentList = data.result;
+    });
+  }
+
+  onOpenModal(action: string, unidadResidencialData?: ResidentialUnit) {
     const modalTitle = this.getModalTitle(action);
 
     const modalRef = this.modalService.open(FormComponent, {
@@ -45,7 +43,7 @@ export class ResidentialUnitComponent {
 
     modalRef.componentInstance.modalTitle = modalTitle;
     modalRef.componentInstance.unidadResidencialData = unidadResidencialData ?? null;
-    modalRef.result.then((unidadResidencial?: UnidadResidencial) => {
+    modalRef.result.then((unidadResidencial?: ResidentialUnit) => {
       console.log('result', unidadResidencial);
       if (unidadResidencial) {
         this.residentList.push(unidadResidencial);
@@ -63,7 +61,7 @@ export class ResidentialUnitComponent {
       case 'edit':
         return 'Editar'
       default:
-        return 'Nuevo';
+        return 'Nueva Unidad Residencial';
     }
   }
 

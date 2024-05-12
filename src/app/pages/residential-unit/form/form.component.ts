@@ -1,7 +1,7 @@
 import { Component, Input, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {UnidadResidencial} from "../residentialUnit.interface";
+import {ResidentialUnit} from "../residentialUnit.interface";
 
 @Component( {
   standalone: true,
@@ -11,7 +11,7 @@ import {UnidadResidencial} from "../residentialUnit.interface";
 } )
 export class FormComponent implements OnInit{
   @Input( { required: true } ) modalTitle = 'Add';
-  @Input() unidadResidencialData: UnidadResidencial | null = null;
+  @Input() unidadResidencialData: ResidentialUnit | null = null;
 
   public activeModal = inject( NgbActiveModal );
   public unidadResidencial = new FormGroup( {
