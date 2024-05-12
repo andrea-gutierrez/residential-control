@@ -348,3 +348,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/webstorm,macos,windows,node,visualstudiocode,linux
+
+/.vscode
+
+/.idea
