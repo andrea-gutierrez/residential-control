@@ -29,7 +29,6 @@ export class ResidentialUnitComponent implements OnInit{
 
   ngOnInit() {
     this.residentialUnitService.getAll().subscribe((data: any) => {
-      console.log(data)
       this.residentList = data.result;
     });
   }
@@ -44,7 +43,6 @@ export class ResidentialUnitComponent implements OnInit{
     modalRef.componentInstance.modalTitle = modalTitle;
     modalRef.componentInstance.unidadResidencialData = unidadResidencialData ?? null;
     modalRef.result.then((unidadResidencial?: ResidentialUnit) => {
-      console.log('result', unidadResidencial);
       if (unidadResidencial) {
         this.residentList.push(unidadResidencial);
       }

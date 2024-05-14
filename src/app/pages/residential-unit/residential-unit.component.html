@@ -3,9 +3,10 @@
   <button type="button" class="btn btn-primary" (click)="onOpenModal('add')">Nuevo</button>
 </div>
 
-<div class="table-responsive">
-  <table class="table table-striped table-hover mt-5">
-    <thead class="text-center">
+@if( residentList.length > 0) {
+  <div class="table-responsive">
+    <table class="table table-striped table-hover mt-5">
+      <thead class="text-center">
       <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Registro Inmobiliario</th>
@@ -14,8 +15,8 @@
         <th scope="col">Email Administrador</th>
         <th scope="col">Acciones</th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       <tr *ngFor="let unidadResidencial of residentList" class="text-center">
         <th scope="row">{{unidadResidencial.nombre}}</th>
         <td>{{unidadResidencial.registroInmobiliario}}</td>
@@ -30,6 +31,9 @@
           </div>
         </td>
       </tr>
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+  </div>
+} @else {
+  <p>No hay unidades residenciales</p>
+}
