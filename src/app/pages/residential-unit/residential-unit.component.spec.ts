@@ -4,6 +4,8 @@ import {fireEvent, render, within} from "@testing-library/angular";
 import {screen} from '@testing-library/dom';
 import {faker} from "@faker-js/faker";
 
+import { throwError } from 'rxjs';
+
 import {of} from "rxjs";
 import {provideHttpClient} from "@angular/common/http";
 
@@ -14,65 +16,6 @@ import {ResidentialUnitService} from "./residential-unit.service";
 describe('ResidentialUnitComponent', () => {
   it('should show the button "Nuevo"', async () => {
     await render(ResidentialUnitComponent, {
-      providers: [
-        provideHttpClient(),
-        {
-          provide: ResidentialUnitService,
-          useValue: {
-            getAll: of([]),
-          }
-        }
-      ]
-    });
-
-    const buttonNew = screen.getByRole('button', {name: 'Nuevo'});
-
-    expect(buttonNew).toBeVisible();
-  });
-
-  it('should open a modal with the title "Nueva Unidad Residencial" when the button "Nuevo" clicked', async () => {
-    await render(ResidentialUnitComponent, {
-      providers: [
-        provideHttpClient()
-      ]
-    });
-
-    const buttonNew = screen.getByRole('button', {name: 'Nuevo'});
-    fireEvent.click(buttonNew);
-
-    expect(screen.getByRole('heading', {name: 'Nueva Unidad Residencial'})).toBeVisible();
-  });
-
-  it('should render all the residential unit that exist', async () => {
-    const residentialUnitList: ResidentialUnit[] = generateResidentialUnitList(5);
-    await render(ResidentialUnitComponent, {
-      providers: [
-        provideHttpClient(),
-      ],
-      componentProviders: [
-        {
-          provide: ResidentialUnitService,
-          useValue: {
-            getAll() {
-              return of({
-                result: [...residentialUnitList]
-              })
-            },
-          }
-        }
-      ]
-    });
-
-    const totalRows = screen.getAllByRole('row');
-
-    expect(totalRows.length - 1).toEqual(residentialUnitList.length);
-  });
-
-  it('should show an error message when there is not data to show in the table', async () => {
-    await render(ResidentialUnitComponent, {
-      providers: [
-        provideHttpClient(),
-      ],
       componentProviders: [
         {
           provide: ResidentialUnitService,
@@ -84,21 +27,41 @@ describe('ResidentialUnitComponent', () => {
             },
           }
         }
-      ]
+      ],
+      ...generalProviders
     });
 
-    const emptyMessage = screen.getByText('No hay unidades residenciales');
+    const buttonNew = screen.getByRole('button', {name: 'Nuevo'});
 
-    expect(emptyMessage).toBeInTheDocument();
-
+    expect(buttonNew).toBeVisible();
   });
 
-  it('should delete the element when clicked the button "delete" inside the table', async () => {
-    const residentialUnitList: ResidentialUnit[] = generateResidentialUnitList(10);
+  it('should open a modal with the title "Nueva Unidad Residencial" when the button "Nuevo" clicked', async () => {
     await render(ResidentialUnitComponent, {
-      providers: [
-        provideHttpClient(),
+      componentProviders: [
+        {
+          provide: ResidentialUnitService,
+          useValue: {
+            getAll() {
+              return of({
+                result: []
+              })
+            },
+          }
+        }
       ],
+      ...generalProviders
+    });
+
+    const buttonNew = screen.getByRole('button', {name: 'Nuevo'});
+    fireEvent.click(buttonNew);
+
+    expect(screen.getByRole('heading', {name: 'Nueva Unidad Residencial'})).toBeVisible();
+  });
+
+  it('should render all the residential unit that exist', async () => {
+    const residentialUnitList: ResidentialUnit[] = generateResidentialUnitList(5);
+    await render(ResidentialUnitComponent, {
       componentProviders: [
         {
           provide: ResidentialUnitService,
@@ -110,7 +73,54 @@ describe('ResidentialUnitComponent', () => {
             },
           }
         }
-      ]
+      ],
+      ...generalProviders
+    });
+
+    const totalRows = screen.getAllByRole('row');
+
+    expect(totalRows.length - 1).toEqual(residentialUnitList.length);
+  });
+
+  it('should show an error message when there is not data to show in the table', async () => {
+    await render(ResidentialUnitComponent, {
+      componentProviders: [
+        {
+          provide: ResidentialUnitService,
+          useValue: {
+            getAll() {
+              return of({
+                result: []
+              })
+            },
+          }
+        }
+      ],
+      ...generalProviders
+    });
+
+    const emptyMessage = screen.getByText('No hay unidades residenciales');
+
+    expect(emptyMessage).toBeInTheDocument();
+
+  });
+
+  it('should delete the element when clicked the button "delete" inside the table', async () => {
+    const residentialUnitList: ResidentialUnit[] = generateResidentialUnitList(10);
+    await render(ResidentialUnitComponent, {
+      componentProviders: [
+        {
+          provide: ResidentialUnitService,
+          useValue: {
+            getAll() {
+              return of({
+                result: [...residentialUnitList]
+              })
+            },
+          }
+        }
+      ],
+      ...generalProviders
     });
 
     const residentialUnitAdminName = new RegExp(residentialUnitList[0].emailAdmin, 'i');
@@ -124,6 +134,26 @@ describe('ResidentialUnitComponent', () => {
     expect(rowDeleted).toBeNull();
     expect(totalRows.length - 1).toEqual(residentialUnitList.length - 1);
   })
+
+  it('should show an alert message if there is any uncontrollable error', async () => {
+    await render(ResidentialUnitComponent, {
+      componentProviders: [
+        {
+          provide: ResidentialUnitService,
+          useValue: {
+            getAll() {
+              return throwError(() => new Error('test'));
+            },
+          }
+        }
+      ],
+      ...generalProviders
+    });
+
+    const message = screen.getByText('Hubo un error', { exact: false});
+
+    expect(message).toBeInTheDocument();
+  });
 });
 
 function generateResidentialUnitList(length = 1): ResidentialUnit[] {
@@ -145,4 +175,10 @@ function generateResidentialUnitList(length = 1): ResidentialUnit[] {
     });
   }
   return temporalResidentialList;
+}
+
+const generalProviders = {
+  providers: [
+    provideHttpClient(),
+  ]
 }

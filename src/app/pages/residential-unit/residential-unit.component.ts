@@ -1,10 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
+
 import {FormComponent} from './form/form.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ResidentialUnit} from "./residentialUnit.interface";
 import {NgForOf} from "@angular/common";
 import {Router} from "@angular/router";
+
+import Swal from 'sweetalert2';
+
 import {ResidentialUnitService} from "./residential-unit.service";
+import {ResidentialUnit} from "./residentialUnit.interface";
 
 @Component({
   selector: 'app-residential-unit',
@@ -19,7 +23,7 @@ import {ResidentialUnitService} from "./residential-unit.service";
   templateUrl: './residential-unit.component.html',
   styleUrl: './residential-unit.component.scss'
 })
-export class ResidentialUnitComponent implements OnInit{
+export class ResidentialUnitComponent implements OnInit {
   private modalService = inject(NgbModal);
   private router = inject(Router);
 
@@ -28,8 +32,17 @@ export class ResidentialUnitComponent implements OnInit{
   public residentList: ResidentialUnit[] = [];
 
   ngOnInit() {
-    this.residentialUnitService.getAll().subscribe((data: any) => {
-      this.residentList = data.result;
+    this.residentialUnitService.getAll().subscribe({
+      next: (data: any) => {
+        this.residentList = data.result;
+      },
+      error: () => {
+        Swal.fire({
+          title: 'Hubo un error!',
+          text: 'Algo pasó',
+          icon: 'error'
+        });
+      }
     });
   }
 
