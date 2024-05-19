@@ -18,26 +18,25 @@ export class FormComponent implements OnInit{
 
   public activeModal = inject( NgbActiveModal );
 
-  public unidadResidencialAdmon = new FormGroup({
-    nombre: new FormControl(null),
-    apellido: new FormControl(null),
-    tipoDocumento: new FormControl(null),
-    documento: new FormControl(null),
-    celular: new FormControl(null),
-    usuario: new FormControl(null),
+  public manager = new FormGroup({
+    name: new FormControl(null),
+    lastname: new FormControl(null),
+    document_type: new FormControl(null),
+    document: new FormControl(null),
     password: new FormControl(null),
-    email: new FormControl(null),
+    building: new FormControl(null),
+    tower: new FormControl(null),
   });
 
   ngOnInit(): void {
     if( this.unidadResidencialAdmonData ) {
-      this.unidadResidencialAdmon.patchValue({
+      this.manager.patchValue({
         ...this.unidadResidencialAdmonData as any
       })
     }
   }
 
   onSave(): void {
-    this.activeModal.close(this.unidadResidencialAdmon.value)
+    this.activeModal.close(this.manager.value);
   }
 }

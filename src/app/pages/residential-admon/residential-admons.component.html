@@ -3,31 +3,32 @@
   <button type="button" class="btn btn-primary" (click)="onOpenModal('add')">Nuevo</button>
 </div>
 
-<div class="table-responsive">
-  <table class="table table-striped table-hover mt-5">
-    <thead class="text-center">
-    <tr>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Documento</th>
-      <th scope="col">Celular</th>
-      <th scope="col">Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let unidadResidencialAdmon of residentialUnitAdmonList" class="text-center">
-      <th scope="row">{{unidadResidencialAdmon.nombre}}</th>
-      <td>{{unidadResidencialAdmon.apellido}}</td>
-      <td>{{unidadResidencialAdmon.documento}}</td>
-      <td>{{unidadResidencialAdmon.celular}}</td>
-      <td>{{unidadResidencialAdmon.email}}</td>
-      <td>
-        <div class="btn-group" role="group" aria-label="Resident Actions">
-          <button type="button" class="btn btn-primary" (click)="onOpenModal('edit', unidadResidencialAdmon)">Editar</button>
-          <button type="button" class="btn btn-danger" (click)="onDelete(unidadResidencialAdmon.id)">Eliminar</button>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+@if( managerList.length > 0 ) {
+  <div class="table-responsive">
+    <table class="table table-striped table-hover mt-5">
+      <thead class="text-center">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Documento</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let unidadResidencialAdmon of managerList" class="text-center">
+        <th scope="row">{{unidadResidencialAdmon.name}}</th>
+        <td>{{unidadResidencialAdmon.lastname}}</td>
+        <td>{{unidadResidencialAdmon.document}}</td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Resident Actions">
+            <button type="button" class="btn btn-primary" (click)="onOpenModal('edit', unidadResidencialAdmon)">Editar</button>
+            <button type="button" class="btn btn-danger" (click)="onDelete(unidadResidencialAdmon.id)">Eliminar</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+} @else {
+  <p>No hay unidades administradores</p>
+}
+

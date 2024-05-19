@@ -1,11 +1,10 @@
 export interface ResidentialUnitAdmins {
-  nombre: string;
-  apellido: string;
-  tipoDocumento: string;
-  documento: string;
-  celular: string;
-  usuario: string;
+  name: string;
+  lastname: string;
+  document_type: string;
+  document: string;
   password: string;
-  email: string;
   id: string;
+  tower: string;
+  building: string;
 }

@@ -3,14 +3,19 @@ import '@testing-library/jest-dom';
 import {fireEvent, render, within} from "@testing-library/angular";
 import {screen} from '@testing-library/dom';
 
-import { faker } from '@faker-js/faker';
+import {faker} from '@faker-js/faker';
 
 import {ResidentialAdmonsComponent} from './residential-admons.component';
 import {ResidentialUnitAdmins} from "./residentialAdmons.interface";
+import {provideHttpClient} from "@angular/common/http";
 
 describe('ResidentialAdmonsComponent', () => {
   it('should show the button "Nuevo"', async () => {
-    await render(ResidentialAdmonsComponent);
+    await render(ResidentialAdmonsComponent, {
+      providers: [
+        provideHttpClient(),
+      ]
+    });
     expect(screen.getByText('Nuevo')).toBeInTheDocument();
   });
 
@@ -47,23 +52,23 @@ describe('ResidentialAdmonsComponent', () => {
       {
         email: faker.internet.email(),
         celular: faker.string.numeric({length: 10, allowLeadingZeros: false}),
-        apellido: faker.person.lastName(),
-        documento: faker.string.numeric({length: 10, allowLeadingZeros: false}),
-        nombre: faker.person.firstName(),
+        lastname: faker.person.lastName(),
+        document: faker.string.numeric({length: 10, allowLeadingZeros: false}),
+        name: faker.person.firstName(),
         password: faker.internet.password(),
         usuario: faker.internet.userName(),
-        tipoDocumento: faker.helpers.arrayElement(['CC', 'TI']),
+        document_type: faker.helpers.arrayElement(['CC', 'TI']),
         id: faker.string.uuid()
       },
       {
         email: faker.internet.email(),
         celular: faker.string.numeric({length: 10, allowLeadingZeros: false}),
-        apellido: faker.person.lastName(),
-        documento: faker.string.numeric({length: 10, allowLeadingZeros: false}),
-        nombre: faker.person.firstName(),
+        lastname: faker.person.lastName(),
+        document: faker.string.numeric({length: 10, allowLeadingZeros: false}),
+        name: faker.person.firstName(),
         password: faker.internet.password(),
         usuario: faker.internet.userName(),
-        tipoDocumento: faker.helpers.arrayElement(['CC', 'TI']),
+        document_type: faker.helpers.arrayElement(['CC', 'TI']),
         id: faker.string.uuid()
       }
     ];

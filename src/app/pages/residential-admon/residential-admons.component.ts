@@ -1,8 +1,10 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormComponent} from "./form/form.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ResidentialUnitAdmins} from "./residentialAdmons.interface";
 import {NgForOf} from "@angular/common";
+import {ResidentialUnitManagerService} from "./residential-unit-manager.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-residential-admon',
@@ -13,22 +15,29 @@ import {NgForOf} from "@angular/common";
   ],
   styleUrl: './residential-admons.component.scss'
 })
-export class ResidentialAdmonsComponent {
+export class ResidentialAdmonsComponent implements OnInit{
   private modalService = inject(NgbModal);
 
-  public residentialUnitAdmonList: ResidentialUnitAdmins[] = [
-    {
-      email: 'cataguirales@gmail.com',
-      id: 'fdsjkfj323423432',
-      celular: '312345345',
-      documento: '323432423',
-      apellido: 'Guirales',
-      nombre: 'Catalina',
-      password: 'password',
-      tipoDocumento: 'cc',
-      usuario: 'cataguirales'
-    }
-  ];
+  private managerService = inject(ResidentialUnitManagerService);
+
+  public managerList: ResidentialUnitAdmins[] = [];
+
+  ngOnInit() {
+    this.managerService.getAll().subscribe({
+      next: (data: any) => {
+        console.log('ok')
+        this.managerList = data.result;
+      },
+      error: (error: any) => {
+        console.error(error, 'error');
+        Swal.fire({
+          title: 'Hubo un error!',
+          text: 'Algo pasó',
+          icon: 'error'
+        });
+      }
+    })
+  }
 
   onOpenModal(action: string, unidadResidencialAdmonData?: ResidentialUnitAdmins) {
     const modalTitle = this.getModalTitle(action);
@@ -41,7 +50,7 @@ export class ResidentialAdmonsComponent {
     modalRef.componentInstance.unidadResidencialAdmonData = unidadResidencialAdmonData ?? null;
     modalRef.result.then((unidadResidencialAdmon?: ResidentialUnitAdmins) => {
       if (unidadResidencialAdmon) {
-        this.residentialUnitAdmonList.push(unidadResidencialAdmon);
+        this.managerList.push(unidadResidencialAdmon);
       }
     })
   }
@@ -56,8 +65,8 @@ export class ResidentialAdmonsComponent {
   }
 
   onDelete(id: string): void {
-    const residentIndex = this.residentialUnitAdmonList.findIndex(resident => resident.id === id);
-    this.residentialUnitAdmonList.splice(residentIndex, 1);
+    const residentIndex = this.managerList.findIndex(resident => resident.id === id);
+    this.managerList.splice(residentIndex, 1);
   }
 
 }

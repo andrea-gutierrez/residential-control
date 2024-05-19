@@ -3,47 +3,43 @@
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
 </div>
 <div class="modal-body mb-3">
-  <form [formGroup]="unidadResidencialAdmon">
+  <form [formGroup]="manager">
     <div class="mb-3">
-      <label for="nombre" class="form-label">Nombre</label>
-      <input type="text" class="form-control" id="nombre" formControlName="nombre">
+      <label for="name" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="name" formControlName="name">
     </div>
     <div class="mb-3">
-      <label for="apellido" class="form-label">Apellido</label>
-      <input type="text" class="form-control" id="apellido" formControlName="apellido">
+      <label for="lastname" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="lastname" formControlName="lastname">
     </div>
     <div class="mb-3">
-      <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
-      <select class="form-control" id="tipoDocumento" formControlName="tipoDocumento">
+      <label for="document_type" class="form-label">Tipo de Documento</label>
+      <select class="form-control" id="document_type" formControlName="document_type">
         <option selected>Selecciona un tipo de documento</option>
         <option value="cc">Cédula de ciudadanía</option>
         <option value="cedulaExtranjeria">Cédula de extranjería</option>
       </select>
     </div>
     <div class="mb-3">
-      <label for="documento" class="form-label">Documento</label>
-      <input type="text" class="form-control" id="documento" formControlName="documento">
-    </div>
-    <div class="mb-3">
-      <label for="celular" class="form-label">Celular</label>
-      <input type="number" class="form-control" id="celular" formControlName="celular">
-    </div>
-    <div class="mb-3">
-      <label for="usuario" class="form-label">Usuario</label>
-      <input type="text" class="form-control" id="usuario" formControlName="usuario">
+      <label for="document" class="form-label">Documento</label>
+      <input type="text" class="form-control" id="document" formControlName="document">
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Contraseña</label>
       <input type="password" class="form-control" id="password" formControlName="password">
     </div>
     <div class="mb-3">
-      <label for="email" class="form-label">Emaill</label>
-      <input type="email" class="form-control" id="email" formControlName="email">
+      <label for="tower" class="form-label">Torre</label>
+      <input type="text" class="form-control" id="tower" formControlName="tower">
+    </div>
+    <div class="mb-3">
+      <label for="building" class="form-label">Apartamento</label>
+      <input type="text" class="form-control" id="building" formControlName="building">
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" [disabled]="unidadResidencialAdmon.invalid" (click)="onSave()">
+  <button type="button" class="btn btn-outline-dark" [disabled]="manager.invalid" (click)="onSave()">
     Guardar
   </button>
 </div>
