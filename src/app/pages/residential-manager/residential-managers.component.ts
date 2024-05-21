@@ -1,7 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
 
-import Swal from "sweetalert2";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 import {FormComponent} from "./form/form.component";
@@ -27,13 +26,6 @@ export class ResidentialManagersComponent implements OnInit{
     this.managerService.getAll().subscribe({
       next: (data: any) => {
         this.managerList = data.result;
-      },
-      error: () => {
-        Swal.fire({
-          title: 'Hubo un error!',
-          text: 'Algo pasó',
-          icon: 'error'
-        });
       }
     })
   }

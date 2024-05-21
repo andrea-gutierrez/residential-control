@@ -5,7 +5,7 @@ import {of} from "rxjs";
 
 import {fireEvent, render, within} from "@testing-library/angular";
 import {screen} from '@testing-library/dom';
-import {fa, faker} from '@faker-js/faker';
+import {faker} from '@faker-js/faker';
 
 import {ResidentialManagersComponent} from './residential-managers.component';
 import {ResidentialUnitAdmins} from "./model/residentialManagers.model";

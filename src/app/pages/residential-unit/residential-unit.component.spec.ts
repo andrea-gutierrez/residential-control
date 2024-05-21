@@ -4,8 +4,6 @@ import {fireEvent, render, within} from "@testing-library/angular";
 import {screen} from '@testing-library/dom';
 import {faker} from "@faker-js/faker";
 
-import { throwError } from 'rxjs';
-
 import {of} from "rxjs";
 import {provideHttpClient} from "@angular/common/http";
 
@@ -133,26 +131,6 @@ describe('ResidentialUnitComponent', () => {
 
     expect(rowDeleted).toBeNull();
     expect(totalRows.length - 1).toEqual(residentialUnitList.length - 1);
-  })
-
-  it('should show an alert message if there is any uncontrollable error', async () => {
-    await render(ResidentialUnitComponent, {
-      componentProviders: [
-        {
-          provide: ResidentialUnitService,
-          useValue: {
-            getAll() {
-              return throwError(() => new Error('test'));
-            },
-          }
-        }
-      ],
-      ...generalProviders
-    });
-
-    const message = screen.getByText('Hubo un error', { exact: false});
-
-    expect(message).toBeInTheDocument();
   });
 });
 

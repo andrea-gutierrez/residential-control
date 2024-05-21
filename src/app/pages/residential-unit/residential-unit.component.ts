@@ -5,8 +5,6 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgForOf} from "@angular/common";
 import {Router} from "@angular/router";
 
-import Swal from 'sweetalert2';
-
 import {ResidentialUnitService} from "./residential-unit.service";
 import {ResidentialUnit} from "./residentialUnit.interface";
 
@@ -35,13 +33,6 @@ export class ResidentialUnitComponent implements OnInit {
     this.residentialUnitService.getAll().subscribe({
       next: (data: any) => {
         this.residentList = data.result;
-      },
-      error: () => {
-        Swal.fire({
-          title: 'Hubo un error!',
-          text: 'Algo pasó',
-          icon: 'error'
-        });
       }
     });
   }
