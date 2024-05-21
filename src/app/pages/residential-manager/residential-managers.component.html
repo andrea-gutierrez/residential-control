@@ -14,14 +14,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let unidadResidencialAdmon of managerList" class="text-center">
-        <th scope="row">{{unidadResidencialAdmon.name}}</th>
-        <td>{{unidadResidencialAdmon.lastname}}</td>
-        <td>{{unidadResidencialAdmon.document}}</td>
+      <tr *ngFor="let unidadResidencialAdmin of managerList" class="text-center">
+        <th scope="row">{{unidadResidencialAdmin.name}}</th>
+        <td>{{unidadResidencialAdmin.lastname}}</td>
+        <td>{{unidadResidencialAdmin.document}}</td>
         <td>
           <div class="btn-group" role="group" aria-label="Resident Actions">
-            <button type="button" class="btn btn-primary" (click)="onOpenModal('edit', unidadResidencialAdmon)">Editar</button>
-            <button type="button" class="btn btn-danger" (click)="onDelete(unidadResidencialAdmon.id)">Eliminar</button>
+            <button type="button" class="btn btn-primary" (click)="onOpenModal('edit', unidadResidencialAdmin)">Editar</button>
+            <button type="button" class="btn btn-danger" (click)="onDelete(unidadResidencialAdmin.id)">Eliminar</button>
           </div>
         </td>
       </tr>
@@ -29,6 +29,6 @@
     </table>
   </div>
 } @else {
-  <p>No hay unidades administradores</p>
+  <p>No hay administradores</p>
 }
 

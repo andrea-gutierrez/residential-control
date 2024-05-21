@@ -1,21 +1,22 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {FormComponent} from "./form/form.component";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ResidentialUnitAdmins} from "./residentialAdmons.interface";
 import {NgForOf} from "@angular/common";
-import {ResidentialUnitManagerService} from "./residential-unit-manager.service";
+
 import Swal from "sweetalert2";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+
+import {FormComponent} from "./form/form.component";
+import {ResidentialUnitAdmins} from "./model/residentialManagers.model";
+import {ResidentialUnitManagerService} from "./service/residential-unit-manager.service";
 
 @Component({
-  selector: 'app-residential-admon',
+  selector: 'management-residential-manager',
   standalone: true,
-  templateUrl: './residential-admons.component.html',
+  templateUrl: './residential-managers.component.html',
   imports: [
     NgForOf
-  ],
-  styleUrl: './residential-admons.component.scss'
+  ]
 })
-export class ResidentialAdmonsComponent implements OnInit{
+export class ResidentialManagersComponent implements OnInit{
   private modalService = inject(NgbModal);
 
   private managerService = inject(ResidentialUnitManagerService);
@@ -25,11 +26,9 @@ export class ResidentialAdmonsComponent implements OnInit{
   ngOnInit() {
     this.managerService.getAll().subscribe({
       next: (data: any) => {
-        console.log('ok')
         this.managerList = data.result;
       },
-      error: (error: any) => {
-        console.error(error, 'error');
+      error: () => {
         Swal.fire({
           title: 'Hubo un error!',
           text: 'Algo pasó',
@@ -39,7 +38,7 @@ export class ResidentialAdmonsComponent implements OnInit{
     })
   }
 
-  onOpenModal(action: string, unidadResidencialAdmonData?: ResidentialUnitAdmins) {
+  onOpenModal(action: string, unidadResidencialAdminData?: ResidentialUnitAdmins) {
     const modalTitle = this.getModalTitle(action);
 
     const modalRef = this.modalService.open(FormComponent, {
@@ -47,10 +46,10 @@ export class ResidentialAdmonsComponent implements OnInit{
     });
 
     modalRef.componentInstance.modalTitle = modalTitle;
-    modalRef.componentInstance.unidadResidencialAdmonData = unidadResidencialAdmonData ?? null;
-    modalRef.result.then((unidadResidencialAdmon?: ResidentialUnitAdmins) => {
-      if (unidadResidencialAdmon) {
-        this.managerList.push(unidadResidencialAdmon);
+    modalRef.componentInstance.unidadResidencialAdmonData = unidadResidencialAdminData ?? null;
+    modalRef.result.then((unidadResidencialAdmin?: ResidentialUnitAdmins) => {
+      if (unidadResidencialAdmin) {
+        this.managerList.push(unidadResidencialAdmin);
       }
     })
   }
