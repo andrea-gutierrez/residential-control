@@ -1,6 +1,6 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ResidentialUnit} from "../../residential-unit/residentialUnit.interface";
 
 @Component({
@@ -14,13 +14,13 @@ import {ResidentialUnit} from "../../residential-unit/residentialUnit.interface"
 export class FormComponent implements OnInit{
   @Input( { required: true } ) modalTitle = 'Add';
 
-  @Input() unidadResidencialAdmonData: ResidentialUnit | null = null;
+  @Input() unidadResidencialAdminData: ResidentialUnit | null = null;
 
   public activeModal = inject( NgbActiveModal );
 
   public manager = new FormGroup({
-    name: new FormControl(null),
-    lastname: new FormControl(null),
+    name: new FormControl(null, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]),
+    lastname: new FormControl(null, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]),
     document_type: new FormControl(null),
     document: new FormControl(null),
     password: new FormControl(null),
@@ -28,10 +28,18 @@ export class FormComponent implements OnInit{
     tower: new FormControl(null),
   });
 
+  get name() {
+    return this.manager.get('name');
+  }
+
+  get lastname() {
+    return this.manager.get('lastname');
+  }
+
   ngOnInit(): void {
-    if( this.unidadResidencialAdmonData ) {
+    if( this.unidadResidencialAdminData ) {
       this.manager.patchValue({
-        ...this.unidadResidencialAdmonData as any
+        ...this.unidadResidencialAdminData as any
       })
     }
   }

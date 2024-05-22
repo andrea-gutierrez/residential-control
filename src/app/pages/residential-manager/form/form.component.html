@@ -7,10 +7,28 @@
     <div class="mb-3">
       <label for="name" class="form-label">Nombre</label>
       <input type="text" class="form-control" id="name" formControlName="name">
+      @if (name?.hasError('required') && name?.dirty) {
+        <div class="text-danger">
+          <small>El nombre es requerido</small>
+        </div>
+      } @else if (name?.hasError('pattern')) {
+        <div class="text-danger">
+          <small>Solo puede ingresar letras</small>
+        </div>
+      }
     </div>
     <div class="mb-3">
       <label for="lastname" class="form-label">Apellido</label>
       <input type="text" class="form-control" id="lastname" formControlName="lastname">
+      @if (lastname?.hasError('required')) {
+        <div class="text-danger">
+          <small>El apellido es requerido</small>
+        </div>
+      } @else if (lastname?.hasError('pattern')) {
+        <div class="text-danger">
+          <small>Solo puede ingresar letras</small>
+        </div>
+      }
     </div>
     <div class="mb-3">
       <label for="document_type" class="form-label">Tipo de Documento</label>
@@ -39,7 +57,7 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" [disabled]="manager.invalid" (click)="onSave()">
+  <button type="button" class="btn btn-outline-dark" (click)="onSave()">
     Guardar
   </button>
 </div>
