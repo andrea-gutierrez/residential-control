@@ -5,42 +5,28 @@
 <div class="modal-body mb-3">
   <form [formGroup]="manager">
     <div class="mb-3">
-      <label for="name" class="form-label">Nombre</label>
+      <label for="name" class="form-label">Nombre <span class="text-danger">*</span></label>
       <input type="text" class="form-control" id="name" formControlName="name">
-      @if (name?.hasError('required') && name?.dirty) {
-        <div class="text-danger">
-          <small>El nombre es requerido</small>
-        </div>
-      } @else if (name?.hasError('pattern')) {
-        <div class="text-danger">
-          <small>Solo puede ingresar letras</small>
-        </div>
-      }
+      <shared-show-error-form [control]="name" inputName="nombre" />
     </div>
     <div class="mb-3">
-      <label for="lastname" class="form-label">Apellido</label>
+      <label for="lastname" class="form-label">Apellido <span class="text-danger">*</span></label>
       <input type="text" class="form-control" id="lastname" formControlName="lastname">
-      @if (lastname?.hasError('required')) {
-        <div class="text-danger">
-          <small>El apellido es requerido</small>
-        </div>
-      } @else if (lastname?.hasError('pattern')) {
-        <div class="text-danger">
-          <small>Solo puede ingresar letras</small>
-        </div>
-      }
+      <shared-show-error-form [control]="lastname" inputName="apellido" />
     </div>
     <div class="mb-3">
-      <label for="document_type" class="form-label">Tipo de Documento</label>
+      <label for="document_type" class="form-label">Tipo de Documento <span class="text-danger">*</span></label>
       <select class="form-control" id="document_type" formControlName="document_type">
-        <option selected>Selecciona un tipo de documento</option>
+        <option value="" selected>Selecciona un tipo de documento</option>
         <option value="cc">Cédula de ciudadanía</option>
         <option value="cedulaExtranjeria">Cédula de extranjería</option>
       </select>
+     <shared-show-error-form [control]="documentType" inputName="tipo de documento" />
     </div>
     <div class="mb-3">
-      <label for="document" class="form-label">Documento</label>
-      <input type="text" class="form-control" id="document" formControlName="document">
+      <label for="document" class="form-label">Documento <span class="text-danger">*</span></label>
+      <input data-testid="document" type="text" class="form-control" id="document" formControlName="document">
+      <shared-show-error-form [control]="document" inputName="documento" [range]="documentLengthRange" />
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Contraseña</label>

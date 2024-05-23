@@ -1,0 +1,13 @@
+@if (control?.errors && control?.dirty) {
+  <div class="text-danger">
+    @if (control?.hasError('required')) {
+      El {{ inputName }} es requerido
+    } @else if (control?.hasError('specialCharacter')) {
+      El {{ inputName }} no puede contener caracteres especiales
+    } @else if (control?.hasError('onlyLetter')) {
+      El {{ inputName }} no puede contener números
+    } @else if (control?.hasError('stringRangeLength')) {
+      El número de caracteres del {{ inputName }} debe estar entre {{ range?.min }} y {{ range?.max }}
+    }
+  </div>
+}
