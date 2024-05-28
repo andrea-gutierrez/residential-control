@@ -16,4 +16,8 @@ export class ResidentialUnitManagerService {
   getAll(): Observable<any> {
     return this.http.get(`${environment.BACKEND}/managers`);
   }
+
+  save(data: any): Observable<any> {
+    return this.http.post(`${environment.BACKEND}/managers`, {});
+  }
 }

@@ -4,15 +4,19 @@ import {screen, render} from "@testing-library/angular";
 
 import {ShowErrorFormComponent} from './show-error-form.component';
 import {FormControl, Validators} from "@angular/forms";
-import {specialCharacterValidator} from "../../validators/specialCharacter.validator";
-import {onlyLetterValidator} from "../../validators/onlyLetter.validator";
-import {stringRangeLengthValidator} from "../../validators/stringRangeLength.validator";
+import {
+  onlyNumberValidator,
+  onlyLetterValidator,
+  stringRangeLengthValidator,
+  specialCharacterValidator
+} from '../../validators';
+import {errorMessages} from "../../dictionary/error-message/errorMessage";
 
 describe('ShowErrorFormComponent', () => {
 
-  it('should show "El item es requerido" when the input is required', async () => {
+  it(`should show "${errorMessages.required}" when the input is required`, async () => {
     const control = new FormControl('testing', [Validators.required]);
-    const {rerender} = await render(ShowErrorFormComponent, {
+    const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
       componentInputs: {
         control,
         inputName: 'item'
@@ -29,15 +33,17 @@ describe('ShowErrorFormComponent', () => {
       partialUpdate: true
     });
 
-    const message = screen.getByText(/El item es requerido/i);
+    detectChanges();
+
+    const message = screen.getByText(errorMessages.required);
 
     expect(message).toBeVisible();
   });
 
-  it('should show "El item no puede contener caracteres especiales"', async () => {
+  it(`should show "${errorMessages.specialCharacter}"`, async () => {
     const control = new FormControl('', [specialCharacterValidator()]);
 
-    const {rerender} = await render(ShowErrorFormComponent, {
+    const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
       componentInputs: {
         control,
         inputName: 'item'
@@ -54,16 +60,45 @@ describe('ShowErrorFormComponent', () => {
       partialUpdate: true
     });
 
-    const message = screen.getByText(/El item no puede contener caracteres especiales/i);
+    detectChanges();
+
+    const message = screen.getByText(errorMessages.specialCharacter);
+
+    expect(message).toBeVisible();
+  });
+
+  it(`should show "${errorMessages.minlength(8)}"`, async () => {
+    const control = new FormControl('', [Validators.minLength(8)]);
+    const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+      componentInputs: {
+        control,
+        inputName: 'item',
+        errorLimits: {min: 8}
+      }
+    });
+
+    control.patchValue('testing');
+    control.markAsDirty();
+
+    await rerender({
+      componentInputs: {
+        control,
+      },
+      partialUpdate: true
+    });
+
+    detectChanges();
+
+    const message = screen.getByText(errorMessages.minlength(8));
 
     expect(message).toBeVisible();
   });
 
   describe('onlyLetter', () => {
-    it('should show "El item no puede contener números"', async () => {
+    it(`should show "${errorMessages.onlyLetter}"`, async () => {
       const control = new FormControl('', [onlyLetterValidator()]);
 
-      const {rerender} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
           inputName: 'item'
@@ -80,7 +115,9 @@ describe('ShowErrorFormComponent', () => {
         partialUpdate: true
       });
 
-      const message = screen.getByText(/El item no puede contener números/i);
+      detectChanges();
+
+      const message = screen.getByText(errorMessages.onlyLetter);
 
       expect(message).toBeVisible();
     });
@@ -88,7 +125,7 @@ describe('ShowErrorFormComponent', () => {
     it('should not show any error if the item does not have any number', async () => {
       const control = new FormControl('', [onlyLetterValidator()]);
 
-      const {rerender} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
           inputName: 'item'
@@ -105,21 +142,23 @@ describe('ShowErrorFormComponent', () => {
         partialUpdate: true
       });
 
-      const message = screen.queryByText(/El item no puede contener números/i);
+      detectChanges();
+
+      const message = screen.queryByText(errorMessages.onlyLetter);
 
       expect(message).toBeNull();
     });
   });
 
   describe('stringRangeLength', () => {
-    it('should show "El número de caracteres del item debe estar entre X y Y"', async () => {
+    it(`should show "${errorMessages.stringRangeLength(8, 10)}"`, async () => {
       const control = new FormControl('', [stringRangeLengthValidator(8, 10)]);
 
-      const {rerender} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
           inputName: 'item',
-          range: {min: 8, max: 10}
+          errorLimits: {min: 8, max: 10}
         }
       });
 
@@ -133,7 +172,9 @@ describe('ShowErrorFormComponent', () => {
         partialUpdate: true
       });
 
-      const message = screen.getByText(/El número de caracteres del item debe estar entre 8 y 10/i);
+      detectChanges();
+
+      const message = screen.getByText(errorMessages.stringRangeLength(8, 10));
 
       expect(message).toBeVisible();
     });
@@ -141,11 +182,11 @@ describe('ShowErrorFormComponent', () => {
     it('should not show any error if the item is between the range expected', async () => {
       const control = new FormControl('', [stringRangeLengthValidator(8, 10)]);
 
-      const {rerender} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
           inputName: 'item',
-          range: {min: 8, max: 10}
+          errorLimits: {min: 8, max: 10}
         }
       });
 
@@ -159,7 +200,65 @@ describe('ShowErrorFormComponent', () => {
         partialUpdate: true
       });
 
-      const message = screen.queryByText(/El número de caracteres del item debe estar entre 8 y 10/i);
+      detectChanges();
+
+      const message = screen.queryByText(errorMessages.stringRangeLength(8, 10));
+
+      expect(message).toBeNull();
+    });
+  });
+
+  describe('isNumber', () => {
+    it(`should show "${errorMessages.isNumber}"`, async () => {
+      const control = new FormControl('', [onlyNumberValidator()]);
+
+      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+        componentInputs: {
+          control,
+          inputName: 'item',
+        }
+      });
+
+      control.patchValue('4d3');
+      control.markAsDirty();
+
+      await rerender({
+        componentInputs: {
+          control,
+        },
+        partialUpdate: true
+      });
+
+      detectChanges();
+
+      const message = screen.getByText(/Debe contener solo números/i);
+
+      expect(message).toBeVisible();
+    });
+
+    it('should not show any error if the item is a number', async () => {
+      const control = new FormControl('', [onlyNumberValidator()]);
+
+      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+        componentInputs: {
+          control,
+          inputName: 'item',
+        }
+      });
+
+      control.patchValue('32442');
+      control.markAsDirty();
+
+      await rerender({
+        componentInputs: {
+          control,
+        },
+        partialUpdate: true
+      });
+
+      detectChanges();
+
+      const message = screen.queryByText(/El item debe ser solo números/i);
 
       expect(message).toBeNull();
     });

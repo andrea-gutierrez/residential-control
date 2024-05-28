@@ -3,47 +3,50 @@
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
 </div>
 <div class="modal-body mb-3">
-  <form [formGroup]="manager">
+  <form [formGroup]="managerForm">
     <div class="mb-3">
       <label for="name" class="form-label">Nombre <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" id="name" formControlName="name">
-      <shared-show-error-form [control]="name" inputName="nombre" />
+      <input data-testid="name" type="text" class="form-control" id="name" formControlName="name">
+      <shared-show-error-form [control]="name"/>
     </div>
     <div class="mb-3">
       <label for="lastname" class="form-label">Apellido <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" id="lastname" formControlName="lastname">
-      <shared-show-error-form [control]="lastname" inputName="apellido" />
+      <input data-testid="lastname" type="text" class="form-control" id="lastname" formControlName="lastname">
+      <shared-show-error-form [control]="lastname"/>
     </div>
     <div class="mb-3">
       <label for="document_type" class="form-label">Tipo de Documento <span class="text-danger">*</span></label>
-      <select class="form-control" id="document_type" formControlName="document_type">
+      <select data-testid="documentType" class="form-control" id="document_type" formControlName="document_type">
         <option value="" selected>Selecciona un tipo de documento</option>
         <option value="cc">Cédula de ciudadanía</option>
         <option value="cedulaExtranjeria">Cédula de extranjería</option>
       </select>
-     <shared-show-error-form [control]="documentType" inputName="tipo de documento" />
+      <shared-show-error-form [control]="documentType"/>
     </div>
     <div class="mb-3">
       <label for="document" class="form-label">Documento <span class="text-danger">*</span></label>
       <input data-testid="document" type="text" class="form-control" id="document" formControlName="document">
-      <shared-show-error-form [control]="document" inputName="documento" [range]="documentLengthRange" />
+      <shared-show-error-form [control]="document" [errorLimits]="documentLengthRange"/>
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Contraseña</label>
-      <input type="password" class="form-control" id="password" formControlName="password">
+      <input data-testid="password" type="password" class="form-control" id="password" formControlName="password">
+      <shared-show-error-form [control]="password" [errorLimits]="{min: 8}"/>
     </div>
     <div class="mb-3">
       <label for="tower" class="form-label">Torre</label>
-      <input type="text" class="form-control" id="tower" formControlName="tower">
+      <input data-testid="tower" type="text" class="form-control" id="tower" formControlName="tower">
+      <shared-show-error-form [control]="tower"/>
     </div>
     <div class="mb-3">
       <label for="building" class="form-label">Apartamento</label>
-      <input type="text" class="form-control" id="building" formControlName="building">
+      <input data-testid="building" type="text" class="form-control" id="building" formControlName="building">
+      <shared-show-error-form [control]="building"/>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="onSave()">
+  <button type="button" class="btn btn-outline-dark" [disabled]="managerForm.invalid" (click)="onSave()">
     Guardar
   </button>
 </div>

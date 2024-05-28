@@ -1,17 +1,40 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {HTTP_INTERCEPTORS, HttpClient, HttpInterceptorFn} from '@angular/common/http';
 
-import { ErrorHandlerInterceptor } from './error-handler-interceptor.service';
+import {ErrorHandlerInterceptor} from './error-handler-interceptor.service';
+import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 
 describe('errorHandlerInterceptor', () => {
-  const interceptor: HttpInterceptorFn = (req, next) =>
-    TestBed.runInInjectionContext(() => ErrorHandlerInterceptor(req, next));
+  let httpTestingController: HttpTestingController;
+  let httpClient: HttpClient;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        ErrorHandlerInterceptor,
+        {provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true},
+      ],
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    httpClient = TestBed.inject(HttpClient);
   });
 
-  it('should be created', () => {
-    expect(interceptor).toBeTruthy();
+  afterEach(() => {
+    httpTestingController.verify();
+  });
+
+  it('should add auth headers ', () => {
+    //arrange
+    const url = '/mockendpoint';
+
+    //act
+    httpClient.get(url).subscribe();
+
+    // assert
+    const req = httpTestingController.expectOne(url);
+    expect(req.request.headers.get('Authorization')).toEqual(
+      'Bearer [the token]'
+    );
   });
 });

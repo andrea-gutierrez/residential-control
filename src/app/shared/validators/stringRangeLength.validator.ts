@@ -7,7 +7,6 @@ export function stringRangeLengthValidator(min: number, max: number): ValidatorF
     if(!value) {
       return null;
     }
-
     const isGreater = value.length > max;
     const isLower = value.length < min;
 

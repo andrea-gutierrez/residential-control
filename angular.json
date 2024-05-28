@@ -85,6 +85,9 @@
           "options": {
             "buildTarget": "access_control_residential_houses:build"
           }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run"
         }
       }
     }

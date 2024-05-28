@@ -1,20 +1,30 @@
 import '@testing-library/jest-dom';
 
 import userEvent from '@testing-library/user-event';
-import {screen, render} from "@testing-library/angular";
+import {screen, render, waitFor} from "@testing-library/angular";
 
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 import {FormComponent} from "./form.component";
+import {errorMessages} from "../../../shared/dictionary/error-message/errorMessage";
+import {
+  checkMinLength, checkOnlyLetter,
+  checkOnlyNumbers,
+  checkRangeLengthInput,
+  checkRequiredInput,
+  checkSpecialCharacters
+} from "../../../tests/formInputs";
+import {faker} from "@faker-js/faker";
+import {provideHttpClient} from "@angular/common/http";
+import {of} from "rxjs";
+import {ResidentialUnitManagerService} from "../service/residential-unit-manager.service";
 
 describe('FormComponent Apartment owners', () => {
   const user = userEvent.setup();
 
   it('should show "Nuevo Administrador" as a title', async () => {
     await render(FormComponent, {
-      providers: [
-        NgbActiveModal
-      ],
+      ...componentProviders,
       componentProperties: {
         modalTitle: 'Nuevo Administrador'
       }
@@ -29,37 +39,25 @@ describe('FormComponent Apartment owners', () => {
     it('should not display any error message when the input has not been dirty', async () => {
       await render(FormComponent, componentProviders);
 
-      expect(screen.queryByText('El nombre es requerido')).toBeNull();
+      expect(screen.queryByText(errorMessages.required)).toBeNull();
     });
 
-    it('should display "El nombre no puede contener números" when the input has numbers', async () => {
+    it(`should display an error when it has numbers`, async () => {
       await render(FormComponent, componentProviders);
 
-      const nameInput = screen.getByLabelText(/nombre/i);
-      await userEvent.type(nameInput, 'Andrea43');
-
-      expect(screen.getByText('El nombre no puede contener números')).toBeVisible();
+      await checkOnlyLetter('name', 'Andrea43');
     });
 
-    it('should display "El nombre es requerido" when the input is empty after dirty', async () => {
+    it('should display an error when empty', async () => {
       await render(FormComponent, componentProviders);
 
-      let nameInput = screen.getByLabelText(/nombre/i);
-      await user.type(nameInput, 'Andrea43');
-
-      nameInput = screen.getByLabelText(/nombre/i);
-      await user.clear(nameInput);
-
-      expect(screen.getByText('El nombre es requerido')).toBeVisible();
+      await checkRequiredInput('name');
     });
 
-    it('should display "El nombre no puede contener caracteres especiales" when the input has special characters', async () => {
+    it('should display an error when it has special characters', async () => {
       await render(FormComponent, componentProviders);
 
-      const nameInput = screen.getByLabelText(/nombre/i);
-      await userEvent.type(nameInput, 'Andre´a');
-
-      expect(screen.getByText('El nombre no puede contener caracteres especiales')).toBeVisible();
+      await checkSpecialCharacters('name', 'Andre´a');
     });
 
     it('should not display any message when the input is valid', async () => {
@@ -80,34 +78,22 @@ describe('FormComponent Apartment owners', () => {
       expect(screen.queryByText('El apellido es requerido')).toBeNull();
     });
 
-    it('should display "El apellido es requerido" when the input is empty after dirty', async () => {
+    it('should display "Requerido" when the input is empty after dirty', async () => {
       await render(FormComponent, componentProviders);
 
-      let nameInput = screen.getByLabelText(/apellido/i);
-      await user.type(nameInput, 'Andrea43');
-
-      nameInput = screen.getByLabelText(/apellido/i);
-      await user.clear(nameInput);
-
-      expect(screen.getByText('El apellido es requerido')).toBeVisible();
+      await checkRequiredInput('lastname', 'Andrea43');
     });
 
     it('should display an error when the Apellido has numbers', async () => {
       await render(FormComponent, componentProviders);
 
-      const nameInput = screen.getByLabelText(/apellido/i);
-      await user.type(nameInput, 'Gut6ierrez');
-
-      expect(screen.getByText('El apellido no puede contener números')).toBeVisible();
+      await checkOnlyLetter('lastname', 'Gut6ierrez');
     });
 
     it('should display an error when the Apellido has special characters', async () => {
       await render(FormComponent, componentProviders);
 
-      const nameInput = screen.getByLabelText(/apellido/i);
-      await user.type(nameInput, 'Gutiérrez');
-
-      expect(screen.getByText('El apellido no puede contener caracteres especiales')).toBeVisible();
+      await checkSpecialCharacters('lastname', 'Gutiérrez');
     });
 
     it('should not display any error message when the input is valid', async () => {
@@ -121,16 +107,16 @@ describe('FormComponent Apartment owners', () => {
   });
 
   describe('input Tipo de documento', () => {
-    it('should display an error message when empty: "El tipo de documento es requerido"', async () => {
+    it('should display an error when empty', async () => {
       await render(FormComponent, componentProviders);
 
-      let documentType = screen.getByLabelText(/Tipo de Documento/i);
+      let documentType = screen.getByTestId('documentType');
       await user.selectOptions(documentType, 'cc');
 
-      documentType = screen.getByLabelText(/Tipo de Documento/i);
+      documentType = screen.getByTestId('documentType');
       await user.selectOptions(documentType, '');
 
-      expect(screen.getByText('El tipo de documento es requerido')).toBeVisible();
+      expect(screen.getByText(errorMessages.required)).toBeVisible();
     });
 
     it('should not display an error when an option selected in the "Tipo de documento"', async () => {
@@ -144,47 +130,144 @@ describe('FormComponent Apartment owners', () => {
   });
 
   describe('input Documento', () => {
-    it('should display an error message when empty: "El documento es requerido"', async () => {
+    it('should display an error message when empty: "Requerido"', async () => {
       await render(FormComponent, componentProviders);
-
-      let document = screen.getByTestId('document');
-      await user.type(document, '12323435332');
-
-      document = screen.getByTestId('document');
-      await user.clear(document);
-
-      expect(screen.getByText('El documento es requerido')).toBeVisible();
+      await checkRequiredInput('document');
     });
 
-    it('should display an error message when the document length is not between 8 and 10 characters', async () => {
+    it('should display an error when it is out of range from 8 - 10', async () => {
+      const range = {min: 8, max: 10};
       await render(FormComponent, componentProviders);
-
-      let document = screen.getByTestId('document');
-      await user.type(document, '1232');
-
-      expect(screen.getByText('El número de caracteres del documento debe estar entre 8 y 10')).toBeVisible();
-
-      document = screen.getByTestId('document');
-      await user.type(document, '12349343234');
-
-      expect(screen.getByText('El número de caracteres del documento debe estar entre 8 y 10')).toBeVisible();
+      await checkRangeLengthInput('document', range, faker.string.numeric({length: 6}));
+      await checkRangeLengthInput('document', range, faker.string.numeric({length: 11}));
     });
 
-    it('should display "No puede tener caracteres especiales" when the input has special characters', async () => {
+    it('should display an error when it has special characters', async () => {
       await render(FormComponent, componentProviders);
 
-      const document = screen.getByTestId('document');
-      await user.type(document, '12321234.');
+      await checkSpecialCharacters('document', '12321-234');
+    });
+  });
 
-      expect(screen.getByText('El documento no puede contener caracteres especiales')).toBeVisible();
+  describe('input password', () => {
+    it('should display an error message when empty: "Requerido"', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkRequiredInput('password', '12323435332');
+    });
+
+    it('should display and error when the length is lower than 8', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkMinLength('password', 8, '432432');
+    });
+  });
+
+  describe('input tower', () => {
+    it('should display an error message when empty: "Requerido"', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkRequiredInput('tower', '3jfkls-');
+    });
+
+    it('should display an error when it has letters', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkOnlyNumbers('tower', '342k');
+    });
+  });
+
+  describe('input building', () => {
+    it('should display an error message when empty: "Requerido"', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkRequiredInput('building', 'ekd');
+    });
+
+    it('should display an error when it has especial characters', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkSpecialCharacters('building', 'A32($');
+    });
+  });
+
+  describe('submit', () => {
+    it('should save the data when it`s valid', async () => {
+      const serviceMock = jest.fn().mockImplementation(() => of({successful: true}));
+      await render(FormComponent, {
+        ...componentProviders,
+        componentProviders: [
+          {
+            provide: ResidentialUnitManagerService,
+            useValue: {
+              save: serviceMock
+            }
+          }
+        ]
+      });
+
+      const inputData = {
+        name: 'Andrea',
+        lastname: 'Gutierrez',
+        document_type: 'cedulaExtranjeria',
+        document: '1152202144',
+        password: 'andrea1993?',
+        tower: '1',
+        building: '1828'
+      }
+
+      let input = screen.getByTestId('name');
+      await user.type(input, 'Andrea');
+
+      input = screen.getByTestId('lastname');
+      await user.type(input, 'Gutierrez');
+
+      input = screen.getByTestId('documentType');
+      await user.selectOptions(input, 'cedulaExtranjeria');
+
+      input = screen.getByTestId('document');
+      await user.type(input, '1152202144');
+
+      input = screen.getByTestId('password');
+      await user.type(input, 'andrea1993?');
+
+      input = screen.getByTestId('tower');
+      await user.type(input, '1');
+
+      input = screen.getByTestId('building');
+      await user.type(input, '1828');
+
+      const button = screen.getByRole('button', {name: /Guardar/i});
+      await user.click(button);
+
+      await waitFor(() => expect(screen.queryByText(/Fue guardado con éxito/i)).toBeVisible());
+      expect(serviceMock).toHaveBeenCalledWith(inputData);
+    });
+
+    it('should not let save if the form is not valid', async () => {
+      const submit = jest.fn();
+      await render(FormComponent, {
+        ...componentProviders,
+        componentProperties: {
+          onSave: submit
+        }
+      });
+
+      const buttonSave = screen.getByRole('button', {name: /Guardar/i});
+      await user.click(buttonSave);
+
+      expect(submit).not.toHaveBeenCalled();
     });
   });
 });
 
+const providers = [
+  NgbActiveModal,
+  provideHttpClient()
+];
+
 const componentProviders = {
-  providers: [
-    NgbActiveModal,
-  ],
+  providers: [...providers],
   componentProperties: {
     modalTitle: 'Nuevo Administrador',
   }
