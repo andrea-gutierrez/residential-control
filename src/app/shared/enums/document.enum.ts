@@ -1,4 +1,6 @@
 export enum Document {
-  CC = 'CC',
-  CedulaExtranjeria = 'Cédula extranjería'
+  cc = 'CC',
+  foreignerId = 'Cédula extranjería',
+  passport = 'Pasaporte',
+  civilRegister = 'Registro civil'
 }

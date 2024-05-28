@@ -19,7 +19,6 @@ describe('ShowErrorFormComponent', () => {
     const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
       componentInputs: {
         control,
-        inputName: 'item'
       }
     });
 
@@ -46,7 +45,6 @@ describe('ShowErrorFormComponent', () => {
     const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
       componentInputs: {
         control,
-        inputName: 'item'
       }
     });
 
@@ -72,7 +70,6 @@ describe('ShowErrorFormComponent', () => {
     const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
       componentInputs: {
         control,
-        inputName: 'item',
         errorLimits: {min: 8}
       }
     });
@@ -101,7 +98,6 @@ describe('ShowErrorFormComponent', () => {
       const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
-          inputName: 'item'
         }
       });
 
@@ -128,7 +124,6 @@ describe('ShowErrorFormComponent', () => {
       const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
-          inputName: 'item'
         }
       });
 
@@ -157,7 +152,6 @@ describe('ShowErrorFormComponent', () => {
       const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
-          inputName: 'item',
           errorLimits: {min: 8, max: 10}
         }
       });
@@ -185,7 +179,6 @@ describe('ShowErrorFormComponent', () => {
       const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
-          inputName: 'item',
           errorLimits: {min: 8, max: 10}
         }
       });
@@ -215,7 +208,6 @@ describe('ShowErrorFormComponent', () => {
       const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
-          inputName: 'item',
         }
       });
 
@@ -242,7 +234,6 @@ describe('ShowErrorFormComponent', () => {
       const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
         componentInputs: {
           control,
-          inputName: 'item',
         }
       });
 
