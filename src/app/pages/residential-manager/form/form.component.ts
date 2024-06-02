@@ -8,10 +8,11 @@ import {
   onlyLetterValidator,
   stringRangeLengthValidator,
   specialCharacterValidator,
-  onlyNumberValidator
+  onlyNumberValidator, stringLengthValidator
 } from "../../../shared/validators";
 import Swal from "sweetalert2";
 import {ResidentialUnitManagerService} from "../service/residential-unit-manager.service";
+import {DocumentType, DocumentTypeMapping} from "../../../shared/enums/document.enum";
 
 @Component({
   standalone: true,
@@ -29,22 +30,35 @@ export class FormComponent implements OnInit {
 
   public activeModal = inject(NgbActiveModal);
 
-  public documentLengthRange = {min: 8, max: 10};
+  protected readonly documentLengthRange = {min: 8, max: 10};
+  protected readonly DocumentTypeMapping = DocumentTypeMapping;
+  protected readonly documentationTypeList = Object.values(DocumentType);
 
   private residentialManagerService = inject(ResidentialUnitManagerService);
 
   public managerForm = new FormGroup({
     name: new FormControl('', [Validators.required, specialCharacterValidator(), onlyLetterValidator()]),
     lastname: new FormControl('', [Validators.required, onlyLetterValidator(), specialCharacterValidator()]),
-    document_type: new FormControl('', [Validators.required]),
+    documentType: new FormControl('', [Validators.required]),
     document: new FormControl('', [Validators.required, stringRangeLengthValidator(this.documentLengthRange.min, this.documentLengthRange.max), specialCharacterValidator()]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     building: new FormControl('', [Validators.required, specialCharacterValidator()]),
     tower: new FormControl('', [Validators.required, onlyNumberValidator()]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required, onlyNumberValidator(), specialCharacterValidator(), stringLengthValidator(10)])
   });
+
 
   get name() {
     return this.managerForm.get('name');
+  }
+
+  get email() {
+    return this.managerForm.get('email');
+  }
+
+  get phone() {
+    return this.managerForm.get('phone');
   }
 
   get lastname() {
@@ -52,7 +66,7 @@ export class FormComponent implements OnInit {
   }
 
   get documentType() {
-    return this.managerForm.get('document_type');
+    return this.managerForm.get('documentType');
   }
 
   get document() {

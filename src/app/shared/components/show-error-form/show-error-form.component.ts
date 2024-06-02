@@ -11,7 +11,7 @@ import {errorMessages} from "../../dictionary/error-message/errorMessage";
 export class ShowErrorFormComponent implements DoCheck {
   @Input({required: true}) control: AbstractControl | null = null;
 
-  @Input({required: false}) errorLimits?: { min?: number, max?: number };
+  @Input({required: false}) errorLimits?: { min?: number, max?: number, length?: number };
 
   public errorMessage = '';
 
@@ -32,6 +32,10 @@ export class ShowErrorFormComponent implements DoCheck {
       return errorMessages.minlength(this.errorLimits?.min);
     } else if (this.control?.hasError('isNumber')) {
       return errorMessages.isNumber;
+    } else if(this.control?.hasError('email')) {
+      return errorMessages.email
+    } else if(this.control?.hasError('stringLength')) {
+      return errorMessages.stringLength(this.errorLimits?.length)
     }
     return '';
   }

@@ -18,6 +18,7 @@ import {faker} from "@faker-js/faker";
 import {provideHttpClient} from "@angular/common/http";
 import {of} from "rxjs";
 import {ResidentialUnitManagerService} from "../service/residential-unit-manager.service";
+import {DocumentType} from "../../../shared/enums/document.enum";
 
 describe('FormComponent Apartment owners', () => {
   const user = userEvent.setup();
@@ -71,6 +72,70 @@ describe('FormComponent Apartment owners', () => {
     });
   });
 
+  describe('input Email', () => {
+    it('should display "Requerido" when the input is empty after dirty', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkRequiredInput('email', 'and');
+    });
+
+    it('should show an error when the input is not an email', async () => {
+      await render(FormComponent, componentProviders);
+
+      const input = screen.getByTestId('email');
+      await user.type(input, 'andrea.com');
+
+      expect(screen.getByText('El formato es inválido')).toBeInTheDocument();
+    });
+
+    it('should not show any error when input valid', async () => {
+      await render(FormComponent, componentProviders);
+
+      const input = screen.getByTestId('email');
+      await user.type(input, 'andrea@gmail.com');
+
+      expect(screen.queryByText('El formato es inválido')).toBeNull();
+    });
+  });
+
+  describe('input phone', () => {
+    it('should display "Requerido" when the input is empty after dirty', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkRequiredInput('phone', 'and');
+    });
+
+    it('should show an error when it has letters', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkOnlyNumbers('phone', '432432k432');
+    });
+
+    it('should show an error when it has special characters', async () => {
+      await render(FormComponent, componentProviders);
+
+      await checkSpecialCharacters('phone', '432432_432');
+    });
+
+    it('should show an error when the length different to 10', async() => {
+      await render(FormComponent, componentProviders);
+
+      const input = screen.getByTestId('phone');
+      await user.type(input, '34234');
+
+      expect(screen.getByText('Debe ser de 10 caracteres')).toBeInTheDocument();
+    });
+
+    it('should not show any error when input valid', async () => {
+      await render(FormComponent, componentProviders);
+
+      const input = screen.getByTestId('phone');
+      await user.type(input, '4565431243');
+
+      expect(screen.queryByText('El formato es inválido')).toBeNull();
+    });
+  });
+
   describe('input Apellido', () => {
     it('should not display any error message when the input has not been dirty', async () => {
       await render(FormComponent, componentProviders);
@@ -111,7 +176,7 @@ describe('FormComponent Apartment owners', () => {
       await render(FormComponent, componentProviders);
 
       let documentType = screen.getByTestId('documentType');
-      await user.selectOptions(documentType, 'cc');
+      await user.selectOptions(documentType, DocumentType.ForeignerId);
 
       documentType = screen.getByTestId('documentType');
       await user.selectOptions(documentType, '');
@@ -123,7 +188,7 @@ describe('FormComponent Apartment owners', () => {
       await render(FormComponent, componentProviders);
 
       let documentType = screen.getByLabelText(/tipo de documento/i);
-      await user.selectOptions(documentType, 'cedulaExtranjeria');
+      await user.selectOptions(documentType, DocumentType.ForeignerId);
 
       expect(screen.queryByText("El tipo de documento es requerido")).toBeNull();
     });
@@ -209,11 +274,13 @@ describe('FormComponent Apartment owners', () => {
       const inputData = {
         name: 'Andrea',
         lastname: 'Gutierrez',
-        document_type: 'cedulaExtranjeria',
+        documentType: DocumentType.Passport,
         document: '1152202144',
         password: 'andrea1993?',
         tower: '1',
-        building: '1828'
+        building: '1828',
+        email: 'andrea@gmail.com',
+        phone: '3234324324'
       }
 
       let input = screen.getByTestId('name');
@@ -223,7 +290,7 @@ describe('FormComponent Apartment owners', () => {
       await user.type(input, 'Gutierrez');
 
       input = screen.getByTestId('documentType');
-      await user.selectOptions(input, 'cedulaExtranjeria');
+      await user.selectOptions(input, DocumentType.Passport);
 
       input = screen.getByTestId('document');
       await user.type(input, '1152202144');
@@ -236,6 +303,12 @@ describe('FormComponent Apartment owners', () => {
 
       input = screen.getByTestId('building');
       await user.type(input, '1828');
+
+      input = screen.getByTestId('email');
+      await user.type(input, 'andrea@gmail.com');
+
+      input = screen.getByTestId('phone');
+      await user.type(input, '3234324324');
 
       const button = screen.getByRole('button', {name: /Guardar/i});
       await user.click(button);

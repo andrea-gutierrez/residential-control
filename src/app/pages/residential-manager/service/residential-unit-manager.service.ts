@@ -17,7 +17,11 @@ export class ResidentialUnitManagerService {
     return this.http.get(`${environment.BACKEND}/managers`);
   }
 
+  deleteById(id: string): Observable<any> {
+    return this.http.delete(`${environment.BACKEND}/delete_managers?query_id=${id}`);
+  }
+
   save(data: any): Observable<any> {
-    return this.http.post(`${environment.BACKEND}/managers`, {});
+    return this.http.post(`${environment.BACKEND}/create_managers`, {...data});
   }
 }

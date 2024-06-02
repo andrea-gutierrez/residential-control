@@ -15,11 +15,12 @@
       <shared-show-error-form [control]="lastname"/>
     </div>
     <div class="mb-3">
-      <label for="document_type" class="form-label">Tipo de Documento <span class="text-danger">*</span></label>
-      <select data-testid="documentType" class="form-control" id="document_type" formControlName="document_type">
+      <label for="documentType" class="form-label">Tipo de Documento <span class="text-danger">*</span></label>
+      <select data-testid="documentType" class="form-control" id="documentType" formControlName="documentType">
         <option value="" selected>Selecciona un tipo de documento</option>
-        <option value="cc">Cédula de ciudadanía</option>
-        <option value="cedulaExtranjeria">Cédula de extranjería</option>
+        @for (documentTypeEnum of documentationTypeList; track documentTypeEnum) {
+          <option [value]="documentTypeEnum">{{ DocumentTypeMapping[documentTypeEnum] }}</option>
+        }
       </select>
       <shared-show-error-form [control]="documentType"/>
     </div>
@@ -29,17 +30,27 @@
       <shared-show-error-form [control]="document" [errorLimits]="documentLengthRange"/>
     </div>
     <div class="mb-3">
-      <label for="password" class="form-label">Contraseña</label>
+      <label for="phone" class="form-label">Celular <span class="text-danger">*</span></label>
+      <input data-testid="phone" type="text" class="form-control" id="phone" formControlName="phone">
+      <shared-show-error-form [control]="phone" [errorLimits]="{length: 10}" />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+      <input data-testid="email" type="email" class="form-control" id="email" formControlName="email">
+      <shared-show-error-form [control]="email"/>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña <span class="text-danger">*</span></label>
       <input data-testid="password" type="password" class="form-control" id="password" formControlName="password">
       <shared-show-error-form [control]="password" [errorLimits]="{min: 8}"/>
     </div>
     <div class="mb-3">
-      <label for="tower" class="form-label">Torre</label>
+      <label for="tower" class="form-label">Torre <span class="text-danger">*</span></label>
       <input data-testid="tower" type="text" class="form-control" id="tower" formControlName="tower">
       <shared-show-error-form [control]="tower"/>
     </div>
     <div class="mb-3">
-      <label for="building" class="form-label">Apartamento</label>
+      <label for="building" class="form-label">Apartamento <span class="text-danger">*</span></label>
       <input data-testid="building" type="text" class="form-control" id="building" formControlName="building">
       <shared-show-error-form [control]="building"/>
     </div>
