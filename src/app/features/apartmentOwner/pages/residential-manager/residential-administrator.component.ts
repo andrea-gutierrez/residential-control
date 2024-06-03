@@ -2,23 +2,22 @@ import {Component, inject, OnInit} from '@angular/core';
 import {NgFor, NgIf} from '@angular/common';
 
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-
-import {FormComponent} from "./form/form.component";
-import {ResidentialUnitAdmins} from "./model/residentialManagers.model";
-import {ResidentialUnitManagerService} from "./service/residential-unit-manager.service";
 import Swal from "sweetalert2";
+
+import {FormComponent} from "../../components/form/form.component";
+import {ResidentialUnitAdmins} from "../../model/residentialManagers.model";
+import {ResidentialUnitManagerService} from "../../service/residential-unit-manager.service";
 
 @Component({
   selector: 'management-residential-manager',
   standalone: true,
-  templateUrl: './residential-managers.component.html',
+  templateUrl: './residential-administrator.component.html',
   imports: [
     NgFor,
     NgIf
   ],
-
 })
-export class ResidentialManagersComponent implements OnInit {
+export class ResidentialAdministratorComponent implements OnInit {
   private modalService = inject(NgbModal);
 
   private managerService = inject(ResidentialUnitManagerService);

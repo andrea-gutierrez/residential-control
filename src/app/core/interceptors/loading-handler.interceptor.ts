@@ -3,9 +3,8 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HttpResponse
 } from '@angular/common/http';
-import {Inject, Injectable} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {catchError, Observable, throwError} from "rxjs";
 import {LoadingService} from "../../shared/services/loading.service";
 
@@ -23,9 +22,7 @@ export class LoadingHandlerInterceptor implements HttpInterceptor {
         return throwError(() => error);
       }))
       .pipe((evt: any) => {
-        if (evt instanceof HttpResponse) {
-          this.loadingService.hideSpinner();
-        }
+        this.loadingService.hideSpinner();
         return evt;
       });
   }

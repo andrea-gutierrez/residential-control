@@ -20,23 +20,26 @@ export class ShowErrorFormComponent implements DoCheck {
   }
 
   getErrorMessage(): string {
-    if (this.control?.hasError('required')) {
-      return errorMessages['required'];
-    } else if (this.control?.hasError('specialCharacter')) {
-      return errorMessages.specialCharacter;
-    } else if (this.control?.hasError('onlyLetter')) {
-      return errorMessages.onlyLetter;
-    } else if (this.control?.hasError('stringRangeLength')) {
-      return errorMessages.stringRangeLength(this.errorLimits?.min, this.errorLimits?.max)
-    } else if (this.control?.hasError('minlength')) {
-      return errorMessages.minlength(this.errorLimits?.min);
-    } else if (this.control?.hasError('isNumber')) {
-      return errorMessages.isNumber;
-    } else if(this.control?.hasError('email')) {
-      return errorMessages.email
-    } else if(this.control?.hasError('stringLength')) {
-      return errorMessages.stringLength(this.errorLimits?.length)
+    const firstError = Object.keys(this.control?.errors ?? {})[0];
+    switch (firstError) {
+      case 'required':
+        return errorMessages.required;
+      case 'specialCharacter':
+        return errorMessages.specialCharacter;
+      case 'onlyLetter':
+        return errorMessages.onlyLetter;
+      case 'stringRangeLength':
+        return errorMessages.stringRangeLength(this.errorLimits?.min, this.errorLimits?.max);
+      case 'minlength':
+        return errorMessages.minlength(this.errorLimits?.min);
+      case 'isNumber':
+        return errorMessages.isNumber;
+      case 'email':
+        return errorMessages.email;
+      case 'stringLength':
+        return errorMessages.stringLength(this.errorLimits?.length);
+      default:
+        return '';
     }
-    return '';
   }
 }

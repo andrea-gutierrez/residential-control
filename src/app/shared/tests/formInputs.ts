@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import userEvent from "@testing-library/user-event";
 import {screen} from "@testing-library/angular";
 
-import {errorMessages} from "../shared/dictionary/error-message/errorMessage";
+import {errorMessages} from "../dictionary/error-message/errorMessage";
 
 const user = userEvent.setup();
 

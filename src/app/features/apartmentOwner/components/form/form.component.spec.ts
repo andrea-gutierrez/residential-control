@@ -6,19 +6,19 @@ import {screen, render, waitFor} from "@testing-library/angular";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 import {FormComponent} from "./form.component";
-import {errorMessages} from "../../../shared/dictionary/error-message/errorMessage";
+import {errorMessages} from "../../../../shared/dictionary/error-message/errorMessage";
 import {
   checkMinLength, checkOnlyLetter,
   checkOnlyNumbers,
   checkRangeLengthInput,
   checkRequiredInput,
   checkSpecialCharacters
-} from "../../../tests/formInputs";
+} from "../../../../shared/tests/formInputs";
 import {faker} from "@faker-js/faker";
 import {provideHttpClient} from "@angular/common/http";
 import {of} from "rxjs";
-import {ResidentialUnitManagerService} from "../service/residential-unit-manager.service";
-import {DocumentType} from "../../../shared/enums/document.enum";
+import {ResidentialUnitManagerService} from "../../service/residential-unit-manager.service";
+import {DocumentType} from "../../../../shared/enums/document.enum";
 
 describe('FormComponent Apartment owners', () => {
   const user = userEvent.setup();

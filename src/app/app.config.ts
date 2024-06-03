@@ -14,8 +14,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(),
-    importProvidersFrom(HttpClientModule, NgxSpinnerModule.forRoot(/*config*/)),
     provideAnimations(),
+    importProvidersFrom(HttpClientModule, NgxSpinnerModule.forRoot(/*config*/)),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerInterceptor,

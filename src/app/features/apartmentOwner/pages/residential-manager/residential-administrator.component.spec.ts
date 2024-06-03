@@ -8,21 +8,21 @@ import {fireEvent, render, waitFor, within} from "@testing-library/angular";
 import {screen} from '@testing-library/dom';
 import {faker} from '@faker-js/faker';
 
-import {ResidentialManagersComponent} from './residential-managers.component';
-import {ResidentialUnitAdmins} from "./model/residentialManagers.model";
-import {ResidentialUnitManagerService} from "./service/residential-unit-manager.service";
+import {ResidentialAdministratorComponent} from './residential-administrator.component';
+import {ResidentialUnitAdmins} from "../../model/residentialManagers.model";
+import {ResidentialUnitManagerService} from "../../service/residential-unit-manager.service";
 
 const user = userEvent.setup();
 describe('ResidentialManagersComponent', () => {
   it('should show the button "Nuevo"', async () => {
-    await render(ResidentialManagersComponent, {
+    await render(ResidentialAdministratorComponent, {
       ...generalProviders
     });
     expect(screen.getByText('Nuevo')).toBeInTheDocument();
   });
 
   it('should open a modal with the title "Nuevo Administrador" when button "Nuevo" clicked', async () => {
-    await render(ResidentialManagersComponent, {
+    await render(ResidentialAdministratorComponent, {
       ...generalProviders,
       componentProviders: [
         {
@@ -44,7 +44,7 @@ describe('ResidentialManagersComponent', () => {
 
   it('should open a modal with the title "Editar Administrador" when button "Editar" clicked', async () => {
     const managerList = generateResidentialAdminList();
-    await render(ResidentialManagersComponent, {
+    await render(ResidentialAdministratorComponent, {
       ...generalProviders,
       componentProviders: [
         {
@@ -68,7 +68,7 @@ describe('ResidentialManagersComponent', () => {
   it('should render all the admin in the table', async () => {
     const managerList: ResidentialUnitAdmins[] = generateResidentialAdminList(4);
 
-    await render(ResidentialManagersComponent, {
+    await render(ResidentialAdministratorComponent, {
       ...generalProviders,
       componentProviders: [
         {
@@ -88,7 +88,7 @@ describe('ResidentialManagersComponent', () => {
   });
 
   it('should show "No hay administradores" as a message instead of the table when there is no data', async () => {
-    await render(ResidentialManagersComponent, {
+    await render(ResidentialAdministratorComponent, {
       ...generalProviders
     });
 
@@ -104,7 +104,7 @@ describe('ResidentialManagersComponent', () => {
 
     it('should show a pup up to ensure the user want to delete the manager', async () => {
       const managerList = generateResidentialAdminList(5);
-      await render(ResidentialManagersComponent, {
+      await render(ResidentialAdministratorComponent, {
         ...generalProviders,
         componentProviders: [
           ...componentProviders,
@@ -131,7 +131,7 @@ describe('ResidentialManagersComponent', () => {
         .mockImplementationOnce(() => {
           return of({result: [...managerList.filter((_v, index) => index !== 0)]})
         });
-      await render(ResidentialManagersComponent, {
+      await render(ResidentialAdministratorComponent, {
         ...generalProviders,
         componentProviders: [
           ...componentProviders,

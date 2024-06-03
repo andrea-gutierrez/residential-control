@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ResidentialUnitComponent } from './pages/residential-unit/residential-unit.component';
+import { ResidentialUnitComponent } from './features/residentialUnitAdministrator/residential-unit/residential-unit.component';
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {NgxSpinnerComponent} from "ngx-spinner";
 

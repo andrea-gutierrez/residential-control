@@ -2,17 +2,16 @@ import {Component, inject, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
-import {ResidentialUnit} from "../../residential-unit/residentialUnit.interface";
-import {ShowErrorFormComponent} from "../../../shared/components/show-error-form/show-error-form.component";
+import {ShowErrorFormComponent} from "../../../../shared/components/show-error-form/show-error-form.component";
 import {
   onlyLetterValidator,
   stringRangeLengthValidator,
   specialCharacterValidator,
   onlyNumberValidator, stringLengthValidator
-} from "../../../shared/validators";
+} from "../../../../shared/validators";
 import Swal from "sweetalert2";
-import {ResidentialUnitManagerService} from "../service/residential-unit-manager.service";
-import {DocumentType, DocumentTypeMapping} from "../../../shared/enums/document.enum";
+import {ResidentialUnitManagerService} from "../../service/residential-unit-manager.service";
+import {DocumentType, DocumentTypeMapping} from "../../../../shared/enums/document.enum";
 
 @Component({
   standalone: true,
@@ -26,7 +25,7 @@ import {DocumentType, DocumentTypeMapping} from "../../../shared/enums/document.
 export class FormComponent implements OnInit {
   @Input({required: true}) modalTitle = 'Add';
 
-  @Input() unidadResidencialAdminData: ResidentialUnit | null = null;
+  @Input() unidadResidencialAdminData: any = null;
 
   public activeModal = inject(NgbActiveModal);
 
