@@ -1,5 +1,3 @@
-import {FormControl} from '@angular/forms';
-
 export interface ResidentialUnit {
   nombre: string;
   address: string;
@@ -14,5 +12,3 @@ export interface ResidentialUnit {
   registroInmobiliario: string;
   id: string;
 }
-
-export type UnidadResidencialDTO = Omit<ResidentialUnit, "id">
