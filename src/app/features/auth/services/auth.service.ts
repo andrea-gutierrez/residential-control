@@ -40,6 +40,12 @@ export class AuthService {
     return of(true);
   }
 
+  logout(): Observable<boolean> {
+    this._currentUser.set(null);
+    localStorage.removeItem('token');
+    return of(true);
+  }
+
   checkAuthStatus(): Observable<Boolean> {
     if (!this.isLocalStorageAvailable) return of(true);
 

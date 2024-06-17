@@ -3,7 +3,7 @@ import {JsonPipe} from "@angular/common";
 import {RouterOutlet} from "@angular/router";
 
 import {NavbarComponent} from "../../../../shared/navbar/navbar.component";
-import {NavBar} from "../../../../shared/navbar/navBar.interface";
+import {NavBar} from "../../../../shared/interfaces/navBar.interface";
 
 @Component({
   standalone: true,

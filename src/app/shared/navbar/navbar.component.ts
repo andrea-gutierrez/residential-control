@@ -1,8 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 
-import {NavBar} from "./navBar.interface";
+import {NavBar} from "../interfaces/navBar.interface";
+import {AuthService} from "../../features/auth/services/auth.service";
 
 @Component({
   selector: 'shared-navbar',
@@ -18,4 +19,14 @@ import {NavBar} from "./navBar.interface";
 export class NavbarComponent {
   @Input({required: true}) menuList: NavBar[] = [];
 
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  onLogout(): void {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigateByUrl('/auth/login');
+      }
+    })
+  }
 }
