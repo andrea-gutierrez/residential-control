@@ -43,6 +43,7 @@ export class AuthService {
   logout(): Observable<boolean> {
     this._currentUser.set(null);
     localStorage.removeItem('token');
+    this._authStatus.set(AuthStatus.notAuthenticated);
     return of(true);
   }
 

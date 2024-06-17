@@ -4,7 +4,9 @@ import {LoginPageComponent} from "./features/auth/pages/login-page/login-page.co
 import {AdminLayoutComponent} from "./features/admin/layouts/admin-layout/admin-layout.component";
 import {isAuthenticatedGuard, isNotAuthenticatedGuard} from "./features/auth/guards";
 import {ResidentialOwnerComponent} from "./features/admin/pages/residential-owner/residential-owner.component";
-import {FormComponent} from "./features/admin/components/form/form.component";
+import {OwnerLayoutComponent} from "./features/owner/layouts/owner-layout/owner-layout.component";
+
+import {Role} from './shared/enums/roles.interface';
 
 export const routes: Routes = [
   {
@@ -12,7 +14,7 @@ export const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate: [isAuthenticatedGuard],
     data: {
-      profile: 'manager'
+      roles: [Role.ADMIN]
     },
     children: [
       {
@@ -20,14 +22,18 @@ export const routes: Routes = [
         component: ResidentialOwnerComponent
       },
       {
-        path: 'form',
-        component: FormComponent
-      },
-      {
         path: '**',
         redirectTo: 'residential-owner'
       }
     ]
+  },
+  {
+    path: 'owner',
+    component: OwnerLayoutComponent,
+    canActivate: [isAuthenticatedGuard],
+    data: {
+      roles: [Role.OWNER]
+    }
   },
   {
     path: 'auth',

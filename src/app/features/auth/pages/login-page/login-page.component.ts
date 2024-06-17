@@ -26,9 +26,20 @@ export class LoginPageComponent {
 
   login() {
     const {email, password, role} = this.loginForm.value;
-    console.log(this.loginForm.value);
-    this.authService.login(email, password, role).subscribe(success => {
-      this.router.navigateByUrl('/admin');
+    this.authService.login(email, password, role).subscribe
+    ({
+      next: () => {
+        this.onNavigate(role);
+      }
     })
+  }
+
+  onNavigate(role: string): void {
+    if (role === 'owner') {
+      this.router.navigateByUrl('/owner');
+      return;
+    }
+    this.router.navigateByUrl('/admin');
+    return;
   }
 }

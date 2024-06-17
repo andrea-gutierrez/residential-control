@@ -1,5 +1,4 @@
 import {Component, inject} from '@angular/core';
-import {JsonPipe} from "@angular/common";
 import {RouterOutlet} from "@angular/router";
 
 import {NavbarComponent} from "../../../../shared/navbar/navbar.component";
@@ -8,7 +7,6 @@ import {NavBar} from "../../../../shared/interfaces/navBar.interface";
 @Component({
   standalone: true,
   imports: [
-    JsonPipe,
     NavbarComponent,
     RouterOutlet
   ],
