@@ -8,13 +8,6 @@ import {FormComponent} from "./features/admin/components/form/form.component";
 
 export const routes: Routes = [
   {
-    path: 'residential-units',
-    component: ResidentialOwnerComponent,
-    data: {
-      profile: 'owner'
-    },
-  },
-  {
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [isAuthenticatedGuard],
@@ -53,6 +46,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'residential-units'
+    redirectTo: 'auth'
   }
 ];

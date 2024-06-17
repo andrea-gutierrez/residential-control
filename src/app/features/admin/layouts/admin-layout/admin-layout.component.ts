@@ -2,9 +2,8 @@ import {Component, inject} from '@angular/core';
 import {JsonPipe} from "@angular/common";
 import {RouterOutlet} from "@angular/router";
 
-import {AuthService} from "../../../auth/services/auth.service";
-
 import {NavbarComponent} from "../../../../shared/navbar/navbar.component";
+import {NavBar} from "../../../../shared/navbar/navBar.interface";
 
 @Component({
   standalone: true,
@@ -17,16 +16,11 @@ import {NavbarComponent} from "../../../../shared/navbar/navbar.component";
   styleUrl: './admin-layout.component.scss'
 })
 export class AdminLayoutComponent {
-  private authService = inject(AuthService);
 
-  public menuList = [
+  public menuList: NavBar[] = [
     {
-      name: 'Unidades Residenciales',
-      route: 'residential-owner'
+      name: 'Propietarios',
+      url: '/admin/residential-owner'
     }
-  ];
-
-  get user() {
-    return this.authService.currentUser();
-  }
+  ]
 }
