@@ -2,11 +2,16 @@ import {Component, DoCheck, Input} from '@angular/core';
 import {AbstractControl} from "@angular/forms";
 
 import {errorMessages} from "../../dictionary/error-message/errorMessage";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'shared-show-error-form',
   standalone: true,
+  imports: [
+    NgIf
+  ],
   templateUrl: './show-error-form.component.html',
+  styleUrl: 'show-error-form.component.scss'
 })
 export class ShowErrorFormComponent implements DoCheck {
   @Input({required: true}) control: AbstractControl | null = null;

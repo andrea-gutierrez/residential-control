@@ -1,0 +1,111 @@
+<div class="modal-header">
+  <h2 class="modal-title text-primary">{{ modalTitle }}</h2>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
+</div>
+<div class="modal-body margin-form">
+  <form [formGroup]="form">
+    <div class="input-group has-validation mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+      <div class="form-floating" [ngClass]="{'is-invalid': name?.invalid}">
+        <input data-testid="name" type="text" class="form-control" placeholder="Escribe el nombre" id="name"
+               formControlName="name" [ngClass]="{'is-invalid': name?.invalid}">
+        <label for="name">Nombre <span class="text-danger fw-bold">*</span></label>
+      </div>
+      <shared-show-error-form [control]="name"/>
+    </div>
+
+    <div class="input-group has-validation mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+      <div class="form-floating" [ngClass]="{'is-invalid': lastname?.invalid}">
+        <input data-testid="lastname" type="text" class="form-control" id="lastname" formControlName="lastname"
+               placeholder="Escribe tu apellido"
+               [ngClass]="{'is-invalid': lastname?.invalid}">
+        <label for="lastname">Apellido <span class="text-danger fw-bold">*</span></label>
+      </div>
+      <shared-show-error-form [control]="lastname"/>
+    </div>
+
+    <div class="input-group has-validation mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-passport"></i></span>
+      <div class="form-floating">
+        <select data-testid="documentType" class="form-select" [ngClass]="{'is-invalid': documentType?.invalid}"
+                id="documentType" formControlName="documentType">
+          <option value="" selected>Selecciona un tipo de documento</option>
+          @for (documentTypeEnum of documentationTypeList; track documentTypeEnum) {
+            <option [value]="documentTypeEnum">{{ DocumentTypeMapping[documentTypeEnum] }}</option>
+          }
+        </select>
+        <label for="documentType" class="form-label">Tipo de Documento <span
+          class="text-danger fw-bold">*</span></label>
+      </div>
+      <shared-show-error-form [control]="documentType"/>
+    </div>
+
+    <div class="input-group has-validation mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-passport"></i></span>
+      <div class="form-floating" [ngClass]="{'is-invalid': document?.invalid}">
+        <input data-testid="document" type="text" placeholder="Escribe tu documento" class="form-control"
+               [ngClass]="{'is-invalid': document?.invalid}"
+               id="document" formControlName="document">
+        <label for="document" class="form-label">Documento <span class="text-danger fw-bold">*</span></label>
+      </div>
+      <shared-show-error-form [control]="document" [errorLimits]="documentLengthRange"/>
+    </div>
+
+    <div class="input-group has-validation mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+      <div class="form-floating" [ngClass]="{'is-invalid': phone?.invalid}">
+        <input data-testid="phone" type="text" class="form-control" [ngClass]="{'is-invalid': phone?.invalid}"
+               id="phone" formControlName="phone" placeholder="Escribe el número de celular">
+        <label for="phone">Celular <span class="text-danger fw-bold">*</span></label>
+      </div>
+      <shared-show-error-form [control]="phone" [errorLimits]="{length: 10}"/>
+    </div>
+
+    <div class="input-group has-validation mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+      <div class="form-floating" [ngClass]="{'is-invalid': email?.invalid}">
+        <input data-testid="email" type="email" class="form-control"
+               [ngClass]="{'is-invalid': email?.invalid}" id="email" formControlName="email"
+               placeholder="Escribe tu email">
+        <label for="email">Email <span class="text-danger fw-bold">*</span></label>
+      </div>
+      <shared-show-error-form [control]="email"/>
+    </div>
+
+    <div class="input-group has-validation mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+      <div class="form-floating" [ngClass]="{'is-invalid': password?.invalid}">
+        <input data-testid="password" type="password" class="form-control" [ngClass]="{'is-invalid': password?.invalid}"
+               id="password" formControlName="password" placeholder="Escribe su contraseña">
+        <label for="password">Contraseña <span class="text-danger fw-bold">*</span></label>
+      </div>
+      <shared-show-error-form [control]="password" [errorLimits]="{min: 8}"/>
+    </div>
+
+    <div class="input-group has-validation mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-building"></i></span>
+      <div class="form-floating" [ngClass]="{'is-invalid': tower?.invalid}">
+        <input data-testid="tower" type="text" class="form-control" id="tower" formControlName="tower"
+               [ngClass]="{'is-invalid': tower?.invalid}" placeholder="Escribe la torre">
+        <label for="tower">Torre <span class="text-danger fw-bold">*</span></label>
+      </div>
+      <shared-show-error-form [control]="tower"/>
+    </div>
+
+    <div class="input-group has-validation mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
+      <div class="form-floating" [ngClass]="{'is-invalid': building?.invalid}">
+        <input data-testid="building" type="text" class="form-control" id="building" formControlName="building"
+               [ngClass]="{'is-invalid': building?.invalid}" placeholder="Escriba el número de apartamento">
+        <label for="building">Apartamento <span class="text-danger fw-bold">*</span></label>
+      </div>
+      <shared-show-error-form [control]="building"/>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary" (click)="onSave()" [disabled]="form.invalid">
+    Guardar
+  </button>
+</div>

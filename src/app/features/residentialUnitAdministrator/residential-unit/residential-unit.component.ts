@@ -9,7 +9,7 @@ import {ResidentialUnitService} from "./residential-unit.service";
 import {ResidentialUnit} from "./residentialUnit.interface";
 
 @Component({
-  selector: 'app-residential-unit',
+  selector: 'app-residential-owner',
   standalone: true,
   imports: [
     FormComponent,

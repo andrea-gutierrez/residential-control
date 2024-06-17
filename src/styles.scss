@@ -2,3 +2,54 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+@import "assets/styles/color";
+@import "assets/styles/form";
+
+// BTN Styles
+
+.btn {
+  border-radius: 32px;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  &.btn-primary {
+    background-color: $primary;
+    color: white;
+
+    &:hover {
+      background-color: #008AFF !important;
+      border-color: dodgerblue !important;
+      border-width: 2px !important;
+    }
+  }
+
+  &.btn-danger {
+    background-color: $primaryDanger;
+  }
+
+  &.btn-secondary {
+    background-color: $secondary;
+
+    &:hover {
+      background-color: #999999;
+      border-color: greenyellow;
+      border-width: 2px;
+    }
+  }
+}
+
+.btn-close:focus {
+  box-shadow: 2px 2px 2px $primaryShadow;
+}
+
+.swal2-styled.swal2-confirm {
+  border-radius: 32px !important;
+  padding-right: 30px !important;
+  padding-left: 30px !important;
+  background-color: #007AFF !important;
+  color: white !important;
+}
+
+.text-primary {
+  color: $primary;
+}

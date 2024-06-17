@@ -1,5 +1,5 @@
 @if (control?.errors && control?.dirty) {
-  <div class="text-danger">
-    {{errorMessage}}
+  <div class="invalid-feedback d-block" role="alert">
+    <small>{{errorMessage}}</small>
   </div>
 }

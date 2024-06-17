@@ -11,7 +11,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
       .pipe(
         tap({
           error: (_error: any) => {
-            console.error(_error);
             Swal.fire({
               text: 'Error inesperado',
               icon: 'error'
