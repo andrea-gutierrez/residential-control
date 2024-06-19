@@ -4,9 +4,10 @@ import {LoginPageComponent} from "./features/auth/pages/login-page/login-page.co
 import {AdminLayoutComponent} from "./features/admin/layouts/admin-layout/admin-layout.component";
 import {isAuthenticatedGuard, isNotAuthenticatedGuard} from "./features/auth/guards";
 import {ResidentialOwnerComponent} from "./features/admin/pages/residential-owner/residential-owner.component";
-import {OwnerLayoutComponent} from "./features/owner/layouts/owner-layout/owner-layout.component";
+import {ResidentialOwnerLayoutComponent} from "./features/residentialOwner/layouts/residential-owner-layout/residential-owner-layout.component";
 
 import {Role} from './shared/enums/roles.interface';
+import {ResidentComponent} from "./features/residentialOwner/pages/resident/resident.component";
 
 export const routes: Routes = [
   {
@@ -29,11 +30,21 @@ export const routes: Routes = [
   },
   {
     path: 'owner',
-    component: OwnerLayoutComponent,
+    component: ResidentialOwnerLayoutComponent,
     canActivate: [isAuthenticatedGuard],
     data: {
       roles: [Role.OWNER]
-    }
+    },
+    children: [
+      {
+        path: 'resident',
+        component: ResidentComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'resident'
+      }
+    ]
   },
   {
     path: 'auth',

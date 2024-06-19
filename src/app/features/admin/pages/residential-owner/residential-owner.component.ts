@@ -4,9 +4,12 @@ import {NgForOf} from "@angular/common";
 import Swal from "sweetalert2";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
-import {FormActions, ResidentialOwner} from "../../interfaces";
-import {FormComponent} from "../../components/form/form.component";
+import {ResidentialOwner} from "../../interfaces";
+
 import {ResidentialOwnerService} from "../../services/residential-owner.service";
+
+import {FormComponent} from "../../components/form/form.component";
+import {FormActions} from "../../../../shared/interfaces/formActions.enum";
 
 @Component({
   standalone: true,
@@ -39,8 +42,6 @@ export class ResidentialOwnerComponent implements OnInit {
     });
 
     const isEditing: boolean = action === FormActions.edit;
-
-    console.log('isEditing', isEditing);
 
     modalRef.componentInstance.modalTitle = isEditing ? 'Editar' : 'Nuevo';
     modalRef.componentInstance.residentialOwnerInfo = isEditing ? residentialOwnerInfo : null;

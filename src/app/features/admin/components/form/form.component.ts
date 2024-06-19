@@ -15,8 +15,9 @@ import {
   stringRangeLengthValidator
 } from "../../../../shared/validators";
 import {ResidentialOwnerService} from "../../services/residential-owner.service";
-import {ResidentialOwner, FormActions, ResidentialOwnerResponse} from "../../interfaces";
+import {ResidentialOwner, ResidentialOwnerResponse} from "../../interfaces";
 import {Observable} from "rxjs";
+import {FormActions} from "../../../../shared/interfaces/formActions.enum";
 
 @Component({
   standalone: true,

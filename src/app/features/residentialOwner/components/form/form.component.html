@@ -1,0 +1,58 @@
+<div class="modal-header">
+  <h2 class="modal-title text-primary">{{ modalTitle }}</h2>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
+</div>
+<div class="modal-body margin-form">
+  <form [formGroup]="form" autocomplete="off">
+    <shared-form-input
+      [options]="documentTypeList"
+      controlName="documentType"
+      formControlName="documentType"
+      iconClass="fa-passport"
+      inputType="select"
+      label="Tipo de documento"
+    >
+      <shared-show-error-form [control]="documentType"/>
+    </shared-form-input>
+
+    <shared-form-input
+      controlName="document"
+      formControlName="document"
+      formType="text"
+      iconClass="fa-passport"
+      inputType="input"
+      label="Documento"
+    >
+      <shared-show-error-form [control]="document" [errorLimits]="documentLengthRange"/>
+    </shared-form-input>
+
+    <shared-form-input
+      controlName="email"
+      formControlName="email"
+      formType="email"
+      iconClass="fa-envelope"
+      inputType="input"
+      label="Correo"
+    >
+      <shared-show-error-form [control]="email"/>
+    </shared-form-input>
+
+    <shared-form-input
+      controlName="apartment"
+      formControlName="apartment"
+      formType="text"
+      iconClass="fa-building-user"
+      inputType="input"
+      label="Apartamento"
+    >
+      <shared-show-error-form [control]="apartment"/>
+    </shared-form-input>
+
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary" (click)="onSave()">
+    Guardar
+  </button>
+</div>

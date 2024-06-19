@@ -4,7 +4,7 @@
   overflow-y: initial !important
 }
 .modal-body{
-  height: 70vh;
+  height: 60vh;
   overflow-y: auto;
 }
 
@@ -23,7 +23,8 @@
   border-width: 2px;
 
   &:focus {
-    box-shadow: 8px 5px 6px rgb(77, 162, 255, 0.5);
+    background-color: $whiteDark;
+    box-shadow: 8px 5px 6px rgb(77, 162, 255, 0.5) !important;
   }
 
   &.is-invalid {
