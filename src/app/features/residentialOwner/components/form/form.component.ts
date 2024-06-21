@@ -65,6 +65,34 @@ export class FormComponent {
     return this.form.get('email');
   }
 
+  get lastname(): AbstractControl | null {
+    return this.form.get('lastname');
+  }
+
+  get name(): AbstractControl | null {
+    return this.form.get('name');
+  }
+
+  get password(): AbstractControl | null {
+    return this.form.get('password');
+  }
+
+  get phone(): AbstractControl | null {
+    return this.form.get('phone');
+  }
+
+  get plate(): AbstractControl | null {
+    return this.form.get('plate');
+  }
+
+  get tower(): AbstractControl | null {
+    return this.form.get('tower');
+  }
+
+  get vehicleType(): AbstractControl | null {
+    return this.form.get('vehicleType');
+  }
+
   onSave(): void {
     console.log(this.form.value);
   }

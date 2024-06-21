@@ -5,6 +5,28 @@
 <div class="modal-body margin-form">
   <form [formGroup]="form" autocomplete="off">
     <shared-form-input
+      controlName="name"
+      formControlName="name"
+      formType="text"
+      iconClass="fa-user"
+      inputType="input"
+      label="Nombre"
+    >
+      <shared-show-error-form [control]="name"/>
+    </shared-form-input>
+
+    <shared-form-input
+      controlName="lastname"
+      formControlName="lastname"
+      formType="text"
+      iconClass="fa-user"
+      inputType="input"
+      label="Apellido"
+    >
+      <shared-show-error-form [control]="lastname"/>
+    </shared-form-input>
+
+    <shared-form-input
       [options]="documentTypeList"
       controlName="documentType"
       formControlName="documentType"
@@ -38,6 +60,38 @@
     </shared-form-input>
 
     <shared-form-input
+      controlName="password"
+      formControlName="password"
+      formType="password"
+      iconClass="fa-lock"
+      inputType="input"
+      label="Password"
+    >
+      <shared-show-error-form [control]="password"/>
+    </shared-form-input>
+
+    <shared-form-input
+      controlName="phone"
+      formControlName="phone"
+      iconClass="fa-phone"
+      inputType="input"
+      label="Celular"
+    >
+      <shared-show-error-form [control]="phone" [errorLimits]="{length: 10}"/>
+    </shared-form-input>
+
+    <shared-form-input
+      controlName="tower"
+      formControlName="tower"
+      formType="text"
+      iconClass="fa-building"
+      inputType="input"
+      label="Torre"
+    >
+      <shared-show-error-form [control]="tower"/>
+    </shared-form-input>
+
+    <shared-form-input
       controlName="apartment"
       formControlName="apartment"
       formType="text"
@@ -48,11 +102,31 @@
       <shared-show-error-form [control]="apartment"/>
     </shared-form-input>
 
+    <shared-form-input
+      controlName="plate"
+      formControlName="plate"
+      iconClass="fa-car-side"
+      inputType="input"
+      label="Placa"
+    >
+      <shared-show-error-form [control]="plate"/>
+    </shared-form-input>
+
+    <shared-form-input
+      controlName="vehicleType"
+      formControlName="vehicleType"
+      iconClass="fa-car-side"
+      inputType="input"
+      label="Tipo de vehiculo"
+    >
+      <shared-show-error-form [control]="vehicleType"/>
+    </shared-form-input>
+
   </form>
 </div>
 
 <div class="modal-footer">
-  <button type="submit" class="btn btn-primary" (click)="onSave()">
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="onSave()">
     Guardar
   </button>
 </div>

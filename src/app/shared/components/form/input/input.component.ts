@@ -19,23 +19,23 @@ import {DocumentTypeMapping} from "../../../enums/document.enum";
 })
 export class InputComponent implements ControlValueAccessor {
 
-  @Input()
+  @Input({required: true})
   public label: string = '';
 
-  @Input()
-  public options: {id: string; value: string}[] = [];
+  @Input({required: true})
+  public inputType: string = '';
+
+  @Input({required: true})
+  public controlName: string = '';
+
+  @Input({required: true})
+  public iconClass: string = '';
 
   @Input()
-  public inputType: string = '';
+  public options: { id: string; value: string }[] = [];
 
   @Input()
   public formType: string = '';
-
-  @Input()
-  public controlName: string = '';
-
-  @Input()
-  public iconClass: string = '';
 
   @Input()
   public disabled = false;

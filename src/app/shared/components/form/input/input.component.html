@@ -1,11 +1,11 @@
 <div class="input-group has-validation mb-3">
   <span class="input-group-text"><i class="fa-solid" [ngClass]="iconClass"></i></span>
-  <div class="form-floating" [ngClass]="{'is-invalid': control?.invalid}">
+  <div class="form-floating" [ngClass]="{'is-invalid': control.invalid}">
     @switch (inputType) {
       @case ('input') {
         <input data-testid="{controlName}" placeholder="Input" class="form-control"
                [type]="formType"
-               [ngClass]="{'is-invalid': control?.invalid, 'is-valid': control?.valid && control?.dirty}"
+               [ngClass]="{'is-invalid': control.invalid, 'is-valid': control.valid && control.dirty}"
                (input)="onChange()"
                (change)="onChange()"
                (blur)="onTouchedFn()"
@@ -15,7 +15,7 @@
       }
       @case ('select') {
         <select data-testid="documentType" class="form-select"
-                [ngClass]="{'is-invalid': control?.invalid, 'is-valid': control?.valid && control?.dirty}"
+                [ngClass]="{'is-invalid': control.invalid, 'is-valid': control.valid && control.dirty}"
                 (change)="onChange()"
                 (blur)="onChange()"
                 [(ngModel)]="data"
@@ -29,7 +29,7 @@
       }
     }
     <label [for]="controlName" class="form-label">{{ label }}
-      @if (control?.hasError('required')) {
+      @if (control.hasError('required')) {
         <span class="text-danger fw-bold">*</span>
       }
     </label>
