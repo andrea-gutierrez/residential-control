@@ -23,7 +23,12 @@
       "ES2022",
       "dom"
     ],
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "@shared/*": [
+        "app/shared/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
