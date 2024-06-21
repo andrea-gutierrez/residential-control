@@ -4,26 +4,27 @@
 </div>
 <div class="modal-body margin-form">
   <form [formGroup]="form">
-    <div class="input-group has-validation mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-      <div class="form-floating" [ngClass]="{'is-invalid': name?.invalid}">
-        <input data-testid="name" type="text" class="form-control" placeholder="Escribe el nombre" id="name"
-               formControlName="name" [ngClass]="{'is-invalid': name?.invalid}">
-        <label for="name">Nombre <span class="text-danger fw-bold">*</span></label>
-      </div>
+    <shared-form-input
+      controlName="name"
+      formControlName="name"
+      formType="text"
+      iconClass="fa-user"
+      inputType="input"
+      label="Nombre"
+    >
       <shared-show-error-form [control]="name"/>
-    </div>
+    </shared-form-input>
 
-    <div class="input-group has-validation mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-      <div class="form-floating" [ngClass]="{'is-invalid': lastname?.invalid}">
-        <input data-testid="lastname" type="text" class="form-control" id="lastname" formControlName="lastname"
-               placeholder="Escribe tu apellido"
-               [ngClass]="{'is-invalid': lastname?.invalid}">
-        <label for="lastname">Apellido <span class="text-danger fw-bold">*</span></label>
-      </div>
+    <shared-form-input
+      controlName="lastname"
+      formControlName="lastname"
+      formType="text"
+      iconClass="fa-user"
+      inputType="input"
+      label="Apellido"
+    >
       <shared-show-error-form [control]="lastname"/>
-    </div>
+    </shared-form-input>
 
     <div class="input-group has-validation mb-3">
       <span class="input-group-text"><i class="fa-solid fa-passport"></i></span>
@@ -41,67 +42,72 @@
       <shared-show-error-form [control]="documentType"/>
     </div>
 
-    <div class="input-group has-validation mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-passport"></i></span>
-      <div class="form-floating" [ngClass]="{'is-invalid': document?.invalid}">
-        <input data-testid="document" type="text" placeholder="Escribe tu documento" class="form-control"
-               [ngClass]="{'is-invalid': document?.invalid}"
-               id="document" formControlName="document">
-        <label for="document" class="form-label">Documento <span class="text-danger fw-bold">*</span></label>
-      </div>
+    <shared-form-input
+      controlName="document"
+      formControlName="document"
+      formType="text"
+      iconClass="fa-passport"
+      inputType="input"
+      label="Documento"
+    >
       <shared-show-error-form [control]="document" [errorLimits]="documentLengthRange"/>
-    </div>
+    </shared-form-input>
 
-    <div class="input-group has-validation mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-      <div class="form-floating" [ngClass]="{'is-invalid': phone?.invalid}">
-        <input data-testid="phone" type="text" class="form-control" [ngClass]="{'is-invalid': phone?.invalid}"
-               id="phone" formControlName="phone" placeholder="Escribe el número de celular">
-        <label for="phone">Celular <span class="text-danger fw-bold">*</span></label>
-      </div>
+    <shared-form-input
+      controlName="phone"
+      formControlName="phone"
+      formType="text"
+      iconClass="fa-phone"
+      inputType="input"
+      label="Celular"
+    >
       <shared-show-error-form [control]="phone" [errorLimits]="{length: 10}"/>
-    </div>
+    </shared-form-input>
 
-    <div class="input-group has-validation mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-      <div class="form-floating" [ngClass]="{'is-invalid': email?.invalid}">
-        <input data-testid="email" type="email" class="form-control"
-               [ngClass]="{'is-invalid': email?.invalid}" id="email" formControlName="email"
-               placeholder="Escribe tu email">
-        <label for="email">Email <span class="text-danger fw-bold">*</span></label>
-      </div>
+    <shared-form-input
+      controlName="email"
+      formControlName="email"
+      formType="email"
+      iconClass="fa-envelope"
+      inputType="input"
+      label="Celular"
+    >
       <shared-show-error-form [control]="email"/>
-    </div>
+    </shared-form-input>
 
-    <div class="input-group has-validation mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-      <div class="form-floating" [ngClass]="{'is-invalid': password?.invalid}">
-        <input data-testid="password" type="password" class="form-control" [ngClass]="{'is-invalid': password?.invalid}"
-               id="password" formControlName="password" placeholder="Escribe su contraseña">
-        <label for="password">Contraseña <span class="text-danger fw-bold">*</span></label>
-      </div>
-      <shared-show-error-form [control]="password" [errorLimits]="{min: 8}"/>
-    </div>
+    <shared-form-input
+      controlName="password"
+      formControlName="password"
+      formType="password"
+      iconClass="fa-lock"
+      inputType="input"
+      label="Contraseña"
+    >
+      <shared-show-error-form [control]="password"/>
+    </shared-form-input>
 
-    <div class="input-group has-validation mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-building"></i></span>
-      <div class="form-floating" [ngClass]="{'is-invalid': tower?.invalid}">
-        <input data-testid="tower" type="text" class="form-control" id="tower" formControlName="tower"
-               [ngClass]="{'is-invalid': tower?.invalid}" placeholder="Escribe la torre">
-        <label for="tower">Torre <span class="text-danger fw-bold">*</span></label>
-      </div>
+    <shared-form-input
+      controlName="tower"
+      formControlName="tower"
+      formType="text"
+      iconClass="fa-building"
+      inputType="input"
+      label="Torre"
+    >
       <shared-show-error-form [control]="tower"/>
-    </div>
+    </shared-form-input>
 
-    <div class="input-group has-validation mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
-      <div class="form-floating" [ngClass]="{'is-invalid': building?.invalid}">
-        <input data-testid="building" type="text" class="form-control" id="building" formControlName="building"
-               [ngClass]="{'is-invalid': building?.invalid}" placeholder="Escriba el número de apartamento">
-        <label for="building">Apartamento <span class="text-danger fw-bold">*</span></label>
-      </div>
+    <shared-form-input
+      controlName="building"
+      formControlName="building"
+      formType="text"
+      iconClass="fa-building-user"
+      inputType="input"
+      label="Apartamento"
+    >
       <shared-show-error-form [control]="building"/>
-    </div>
+    </shared-form-input>
+
   </form>
 </div>
 <div class="modal-footer">

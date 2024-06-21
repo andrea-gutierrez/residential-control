@@ -1,30 +1,34 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {NgClass} from "@angular/common";
+import {Observable} from "rxjs";
 
 import Swal from "sweetalert2";
-import {NgClass} from "@angular/common";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
-import {ShowErrorFormComponent} from "../../../../shared/components/show-error-form/show-error-form.component";
-import {DocumentType, DocumentTypeMapping} from "../../../../shared/enums/document.enum";
+import {DocumentType, DocumentTypeMapping} from "@shared/enums/document.enum";
+import {FormActions} from "@shared/interfaces/formActions.enum";
+import {InputComponent} from "@shared/components/form/input/input.component";
+import {ShowErrorFormComponent} from "@shared/components/show-error-form/show-error-form.component";
 import {
   onlyLetterValidator,
   onlyNumberValidator,
   specialCharacterValidator,
   stringLengthValidator,
   stringRangeLengthValidator
-} from "../../../../shared/validators";
-import {ResidentialOwnerService} from "../../services/residential-owner.service";
+} from "@shared/validators";
+
 import {ResidentialOwner, ResidentialOwnerResponse} from "../../interfaces";
-import {Observable} from "rxjs";
-import {FormActions} from "../../../../shared/interfaces/formActions.enum";
+
+import {ResidentialOwnerService} from "../../services/residential-owner.service";
 
 @Component({
   standalone: true,
   imports: [
     ReactiveFormsModule,
     ShowErrorFormComponent,
-    NgClass
+    NgClass,
+    InputComponent
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
