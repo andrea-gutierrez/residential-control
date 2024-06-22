@@ -1,7 +1,7 @@
 import {Component, inject, Input} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {ShowErrorFormComponent} from "../../../../shared/components/show-error-form/show-error-form.component";
+import {ShowErrorComponent} from "@shared/components/form/show-error/show-error.component";
 import {NgClass, NgForOf} from "@angular/common";
 import {DocumentType, DocumentTypeMapping} from "../../../../shared/enums/document.enum";
 import {InputComponent} from "../../../../shared/components/form/input/input.component";
@@ -12,7 +12,7 @@ import {InputComponent} from "../../../../shared/components/form/input/input.com
     ReactiveFormsModule,
     NgClass,
     NgForOf,
-    ShowErrorFormComponent,
+    ShowErrorComponent,
     InputComponent,
   ],
   templateUrl: './form.component.html',

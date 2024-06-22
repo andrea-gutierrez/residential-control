@@ -2,21 +2,21 @@ import '@testing-library/jest-dom';
 
 import {screen, render} from "@testing-library/angular";
 
-import {ShowErrorFormComponent} from './show-error-form.component';
+import {ShowErrorComponent} from './show-error.component';
 import {FormControl, Validators} from "@angular/forms";
 import {
   onlyNumberValidator,
   onlyLetterValidator,
   stringRangeLengthValidator,
   specialCharacterValidator
-} from '../../validators';
-import {errorMessages} from "../../dictionary/error-message/errorMessage";
+} from '../../../validators';
+import {errorMessages} from "../../../dictionary/error-message/errorMessage";
 
 describe('ShowErrorFormComponent', () => {
 
   it(`should show "${errorMessages.required}" when the input is required`, async () => {
     const control = new FormControl('testing', [Validators.required]);
-    const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+    const {rerender, detectChanges} = await render(ShowErrorComponent, {
       componentInputs: {
         control,
       }
@@ -42,7 +42,7 @@ describe('ShowErrorFormComponent', () => {
   it(`should show "${errorMessages.specialCharacter}"`, async () => {
     const control = new FormControl('', [specialCharacterValidator()]);
 
-    const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+    const {rerender, detectChanges} = await render(ShowErrorComponent, {
       componentInputs: {
         control,
       }
@@ -67,7 +67,7 @@ describe('ShowErrorFormComponent', () => {
 
   it(`should show "${errorMessages.minlength(8)}"`, async () => {
     const control = new FormControl('', [Validators.minLength(8)]);
-    const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+    const {rerender, detectChanges} = await render(ShowErrorComponent, {
       componentInputs: {
         control,
         errorLimits: {min: 8}
@@ -95,7 +95,7 @@ describe('ShowErrorFormComponent', () => {
     it(`should show "${errorMessages.onlyLetter}"`, async () => {
       const control = new FormControl('', [onlyLetterValidator()]);
 
-      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorComponent, {
         componentInputs: {
           control,
         }
@@ -121,7 +121,7 @@ describe('ShowErrorFormComponent', () => {
     it('should not show any error if the item does not have any number', async () => {
       const control = new FormControl('', [onlyLetterValidator()]);
 
-      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorComponent, {
         componentInputs: {
           control,
         }
@@ -149,7 +149,7 @@ describe('ShowErrorFormComponent', () => {
     it(`should show "${errorMessages.stringRangeLength(8, 10)}"`, async () => {
       const control = new FormControl('', [stringRangeLengthValidator(8, 10)]);
 
-      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorComponent, {
         componentInputs: {
           control,
           errorLimits: {min: 8, max: 10}
@@ -176,7 +176,7 @@ describe('ShowErrorFormComponent', () => {
     it('should not show any error if the item is between the range expected', async () => {
       const control = new FormControl('', [stringRangeLengthValidator(8, 10)]);
 
-      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorComponent, {
         componentInputs: {
           control,
           errorLimits: {min: 8, max: 10}
@@ -205,7 +205,7 @@ describe('ShowErrorFormComponent', () => {
     it(`should show "${errorMessages.isNumber}"`, async () => {
       const control = new FormControl('', [onlyNumberValidator()]);
 
-      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorComponent, {
         componentInputs: {
           control,
         }
@@ -231,7 +231,7 @@ describe('ShowErrorFormComponent', () => {
     it('should not show any error if the item is a number', async () => {
       const control = new FormControl('', [onlyNumberValidator()]);
 
-      const {rerender, detectChanges} = await render(ShowErrorFormComponent, {
+      const {rerender, detectChanges} = await render(ShowErrorComponent, {
         componentInputs: {
           control,
         }

@@ -19,30 +19,15 @@ import {DocumentTypeMapping} from "@shared/enums/document.enum";
   styleUrl: './input.component.scss'
 })
 export class InputComponent implements ControlValueAccessor {
+  @Input({required: true}) controlName!: string;
+  @Input({required: true}) iconClass!: string;
+  @Input({required: true}) inputType!: string;
+  @Input({required: true}) label!: string;
 
-  @Input({required: true})
-  public label: string = '';
-
-  @Input({required: true})
-  public inputType: string = '';
-
-  @Input({required: true})
-  public controlName: string = '';
-
-  @Input({required: true})
-  public iconClass: string = '';
-
-  @Input()
-  public options: { id: string; value: string }[] = [];
-
-  @Input()
-  public formType: string = '';
-
-  @Input()
-  public disabled = false;
-
-  @Input()
-  public data: string = '';
+  @Input() data: string = '';
+  @Input() disabled = false;
+  @Input() formType: string = '';
+  @Input() options: { id: string; value: string }[] = [];
 
   public onChangeFn = (_: any) => {
   };
@@ -52,20 +37,6 @@ export class InputComponent implements ControlValueAccessor {
 
   constructor(@Self() @Optional() public control: NgControl) {
     this.control && (this.control.valueAccessor = this);
-  }
-
-  public get invalid(): boolean | null {
-    return this.control ? this.control.invalid : false;
-  }
-
-  public get showError(): boolean | null {
-    if (!this.control) {
-      return false;
-    }
-
-    const {dirty, touched} = this.control;
-
-    return this.invalid ? (dirty || touched) : false;
   }
 
   public registerOnChange(fn: any): void {
@@ -88,5 +59,4 @@ export class InputComponent implements ControlValueAccessor {
     this.onChangeFn(this.data);
   }
 
-  protected readonly DocumentTypeMapping = DocumentTypeMapping;
 }

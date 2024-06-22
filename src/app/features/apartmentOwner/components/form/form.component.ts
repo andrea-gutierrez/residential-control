@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 import {DocumentType, DocumentTypeMapping} from "@shared/enums/document.enum";
-import {ShowErrorFormComponent} from "@shared/components/show-error-form/show-error-form.component";
+import {ShowErrorComponent} from "@shared/components/form/show-error/show-error.component";
 import {
   onlyLetterValidator,
   stringRangeLengthValidator,
@@ -19,7 +19,7 @@ import {ResidentialUnitManagerService} from "../../service/residential-unit-mana
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    ShowErrorFormComponent
+    ShowErrorComponent
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'

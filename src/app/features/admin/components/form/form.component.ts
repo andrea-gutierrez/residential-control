@@ -9,7 +9,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {DocumentType, DocumentTypeMapping} from "@shared/enums/document.enum";
 import {FormActions} from "@shared/interfaces/formActions.enum";
 import {InputComponent} from "@shared/components/form/input/input.component";
-import {ShowErrorFormComponent} from "@shared/components/show-error-form/show-error-form.component";
+import {ShowErrorComponent} from "@shared/components/form/show-error/show-error.component";
 import {
   onlyLetterValidator,
   onlyNumberValidator,
@@ -26,7 +26,7 @@ import {ResidentialOwnerService} from "../../services/residential-owner.service"
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    ShowErrorFormComponent,
+    ShowErrorComponent,
     NgClass,
     InputComponent
   ],

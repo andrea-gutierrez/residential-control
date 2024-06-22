@@ -2,35 +2,39 @@
   <span class="input-group-text"><i class="fa-solid" [ngClass]="iconClass"></i></span>
   <div class="form-floating" [ngClass]="{'is-invalid': control.invalid}">
     @switch (inputType) {
-      @case ('input') {
-        <input data-testid="{controlName}" placeholder="Input" class="form-control"
-               [type]="formType"
-               [ngClass]="{'is-invalid': control.invalid, 'is-valid': control.valid && control.dirty}"
-               (input)="onChange()"
-               (change)="onChange()"
-               (blur)="onTouchedFn()"
-               [(ngModel)]="data"
-               [ngModelOptions]="{standalone: true}"
-               [id]="controlName">
+    @case ('input') {
+    <input data-testid="{controlName}" placeholder="Input" class="form-control"
+           (blur)="onTouchedFn()"
+           (change)="onChange()"
+           (input)="onChange()"
+           [(ngModel)]="data"
+           [disabled]="disabled"
+           [id]="controlName"
+           [ngClass]="{'is-invalid': control.invalid, 'is-valid': control.valid && control.dirty}"
+           [ngModelOptions]="{standalone: true}"
+           [type]="formType"
+    >
+    }
+    @case ('select') {
+    <select data-testid="documentType" class="form-select"
+            (blur)="onChange()"
+            (change)="onChange()"
+            [(ngModel)]="data"
+            [disabled]="disabled"
+            [id]="controlName"
+            [ngClass]="{'is-invalid': control.invalid, 'is-valid': control.valid && control.dirty}"
+            [ngModelOptions]="{standalone: true}"
+    >
+      <option value="" selected>Selecciona un valor</option>
+      @for (option of options; track option.id) {
+      <option [value]="option.id">{{ option.value }}</option>
       }
-      @case ('select') {
-        <select data-testid="documentType" class="form-select"
-                [ngClass]="{'is-invalid': control.invalid, 'is-valid': control.valid && control.dirty}"
-                (change)="onChange()"
-                (blur)="onChange()"
-                [(ngModel)]="data"
-                [ngModelOptions]="{standalone: true}"
-                [id]="controlName">
-          <option value="" selected>Selecciona un valor</option>
-          @for (option of options; track option.id) {
-            <option [value]="option.id">{{ option.value }}</option>
-          }
-        </select>
-      }
+    </select>
+    }
     }
     <label [for]="controlName" class="form-label">{{ label }}
       @if (control.hasError('required')) {
-        <span class="text-danger fw-bold">*</span>
+      <span class="text-danger fw-bold">*</span>
       }
     </label>
   </div>

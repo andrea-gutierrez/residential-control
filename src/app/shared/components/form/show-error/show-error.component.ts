@@ -1,8 +1,8 @@
-import {Component, DoCheck, Input} from '@angular/core';
 import {AbstractControl} from "@angular/forms";
-
-import {errorMessages} from "../../dictionary/error-message/errorMessage";
+import {Component, DoCheck, Input} from '@angular/core';
 import {NgIf} from "@angular/common";
+
+import {errorMessages} from "@shared/dictionary/error-message/errorMessage";
 
 @Component({
   selector: 'shared-show-error-form',
@@ -10,13 +10,12 @@ import {NgIf} from "@angular/common";
   imports: [
     NgIf
   ],
-  templateUrl: './show-error-form.component.html',
-  styleUrl: 'show-error-form.component.scss'
+  templateUrl: './show-error.component.html',
+  styleUrl: 'show-error.component.scss'
 })
-export class ShowErrorFormComponent implements DoCheck {
-  @Input({required: true}) control: AbstractControl | null = null;
-
+export class ShowErrorComponent implements DoCheck {
   @Input({required: false}) errorLimits?: { min?: number, max?: number, length?: number };
+  @Input({required: true}) control: AbstractControl | null = null;
 
   public errorMessage = '';
 
