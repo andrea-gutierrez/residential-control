@@ -1,7 +1,8 @@
-import {Component, Input, Optional, Output, Self} from '@angular/core';
-import {NgClass, NgForOf, NgIf, NgSwitch} from "@angular/common";
+import {Component, Input, Optional, Self} from '@angular/core';
 import {ControlValueAccessor, FormsModule, NgControl, ReactiveFormsModule} from "@angular/forms";
-import {DocumentTypeMapping} from "../../../enums/document.enum";
+import {NgClass, NgForOf, NgIf, NgSwitch} from "@angular/common";
+
+import {DocumentTypeMapping} from "@shared/enums/document.enum";
 
 @Component({
   selector: 'shared-form-input',

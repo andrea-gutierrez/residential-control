@@ -4,12 +4,11 @@ import {NgForOf} from "@angular/common";
 import Swal from "sweetalert2";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
-import {ResidentialOwner} from "../../interfaces";
-
-import {ResidentialOwnerService} from "../../services/residential-owner.service";
+import {FormActions} from "@shared/interfaces/formActions.enum";
 
 import {FormComponent} from "../../components/form/form.component";
-import {FormActions} from "../../../../shared/interfaces/formActions.enum";
+import {ResidentialOwnerService} from "../../services/residential-owner.service";
+import {ResidentialOwner} from "../../interfaces";
 
 @Component({
   standalone: true,

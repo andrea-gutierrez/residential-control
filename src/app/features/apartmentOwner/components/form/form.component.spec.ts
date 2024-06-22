@@ -1,24 +1,26 @@
 import '@testing-library/jest-dom';
+import {of} from "rxjs";
+import {provideHttpClient} from "@angular/common/http";
 
 import userEvent from '@testing-library/user-event';
 import {screen, render, waitFor} from "@testing-library/angular";
 
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {faker} from "@faker-js/faker";
 
-import {FormComponent} from "./form.component";
-import {errorMessages} from "../../../../shared/dictionary/error-message/errorMessage";
+import {DocumentType} from "@shared/enums/document.enum";
+import {errorMessages} from "@shared/dictionary/error-message/errorMessage";
 import {
   checkMinLength, checkOnlyLetter,
   checkOnlyNumbers,
   checkRangeLengthInput,
   checkRequiredInput,
   checkSpecialCharacters
-} from "../../../../shared/tests/formInputs";
-import {faker} from "@faker-js/faker";
-import {provideHttpClient} from "@angular/common/http";
-import {of} from "rxjs";
+} from "@shared/tests/formInputs";
+
 import {ResidentialUnitManagerService} from "../../service/residential-unit-manager.service";
-import {DocumentType} from "../../../../shared/enums/document.enum";
+
+import {FormComponent} from "./form.component";
 
 describe('FormComponent Apartment owners', () => {
   const user = userEvent.setup();
@@ -117,7 +119,7 @@ describe('FormComponent Apartment owners', () => {
       await checkSpecialCharacters('phone', '432432_432');
     });
 
-    it('should show an error when the length different to 10', async() => {
+    it('should show an error when the length different to 10', async () => {
       await render(FormComponent, componentProviders);
 
       const input = screen.getByTestId('phone');

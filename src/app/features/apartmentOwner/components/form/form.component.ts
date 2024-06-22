@@ -1,17 +1,19 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
-import {ShowErrorFormComponent} from "../../../../shared/components/show-error-form/show-error-form.component";
+import Swal from "sweetalert2";
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+
+import {DocumentType, DocumentTypeMapping} from "@shared/enums/document.enum";
+import {ShowErrorFormComponent} from "@shared/components/show-error-form/show-error-form.component";
 import {
   onlyLetterValidator,
   stringRangeLengthValidator,
   specialCharacterValidator,
   onlyNumberValidator, stringLengthValidator
-} from "../../../../shared/validators";
-import Swal from "sweetalert2";
+} from "@shared/validators";
+
 import {ResidentialUnitManagerService} from "../../service/residential-unit-manager.service";
-import {DocumentType, DocumentTypeMapping} from "../../../../shared/enums/document.enum";
 
 @Component({
   standalone: true,

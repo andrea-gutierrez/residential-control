@@ -1,12 +1,17 @@
 import {Component, computed, effect, inject} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
+
+import {NgxSpinnerComponent} from "ngx-spinner";
+
+import {NavbarComponent} from "@shared/navbar/navbar.component";
+
+import {AuthService} from "./features/auth/services/auth.service";
+
+import {AuthStatus} from "./features/auth/interfaces";
+
 import {
   ResidentialUnitComponent
 } from './features/residentialUnitAdministrator/residential-unit/residential-unit.component';
-import {NavbarComponent} from "./shared/navbar/navbar.component";
-import {NgxSpinnerComponent} from "ngx-spinner";
-import {AuthService} from "./features/auth/services/auth.service";
-import {AuthStatus} from "./features/auth/interfaces";
 
 @Component({
   selector: 'app-root',

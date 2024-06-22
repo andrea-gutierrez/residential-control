@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {RouterOutlet} from "@angular/router";
 
-import {NavbarComponent} from "../../../../shared/navbar/navbar.component";
+import {NavBar} from "@shared/interfaces/navBar.interface";
 
-import {NavBar} from "../../../../shared/interfaces/navBar.interface";
+import {NavbarComponent} from "@shared/navbar/navbar.component";
 
 @Component({
   selector: 'residential-owner-layout',

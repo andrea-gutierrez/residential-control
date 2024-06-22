@@ -2,10 +2,10 @@ import {Component, inject} from '@angular/core';
 
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
-import {FormActions} from "../../../../shared/interfaces/formActions.enum";
-import {Resident} from "../../interfacse/resident.interface";
+import {FormActions} from "@shared/interfaces/formActions.enum";
 
 import {FormComponent} from "../../components/form/form.component";
+import {Resident} from "../../interfacse/resident.interface";
 
 @Component({
   standalone: true,

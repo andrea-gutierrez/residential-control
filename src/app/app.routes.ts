@@ -1,9 +1,9 @@
 import {Routes} from '@angular/router';
 
+import {Role} from '@shared/enums/roles.interface';
+
 import {isAuthenticatedGuard, isNotAuthenticatedGuard} from "./features/auth/guards";
 import {isAuthorizedGuard} from "./features/auth/guards/is-authorized.guard";
-
-import {Role} from './shared/enums/roles.interface';
 
 import {AdminLayoutComponent} from "./features/admin/layouts/admin-layout/admin-layout.component";
 import {AuthLayoutComponent} from "./features/auth/layouts/auth-layout/auth-layout.component";
@@ -11,7 +11,9 @@ import {HomeLayoutComponent} from "./features/home/layouts/home-layout/home-layo
 import {LoginPageComponent} from "./features/auth/pages/login-page/login-page.component";
 import {ResidentComponent} from "./features/residentialOwner/pages/resident/resident.component";
 import {ResidentialOwnerComponent} from "./features/admin/pages/residential-owner/residential-owner.component";
-import {ResidentialOwnerLayoutComponent} from "./features/residentialOwner/layouts/residential-owner-layout/residential-owner-layout.component";
+import {
+  ResidentialOwnerLayoutComponent
+} from "./features/residentialOwner/layouts/residential-owner-layout/residential-owner-layout.component";
 
 export const routes: Routes = [
   {
