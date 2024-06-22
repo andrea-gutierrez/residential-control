@@ -1,4 +1,4 @@
 export enum FormActions {
-  edit = 'edit',
-  create = 'create',
+  Edit = 'Edit',
+  Create = 'Create',
 }

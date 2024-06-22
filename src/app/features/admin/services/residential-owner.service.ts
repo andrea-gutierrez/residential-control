@@ -5,8 +5,11 @@ import { Observable, map } from 'rxjs';
 
 import { environment } from '@environment/environment';
 
-import { ResidentialOwner, ResidentialOwnerDto } from '../interfaces';
-import { ResidentialOwnerResponse } from '../interfaces';
+import {
+  ResidentialOwner,
+  ResidentialOwnerDto,
+  ResidentialOwnerResponse,
+} from '../interfaces';
 
 @Injectable({
   providedIn: 'root',

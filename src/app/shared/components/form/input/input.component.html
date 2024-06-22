@@ -7,12 +7,12 @@
   ></span>
   <div
     class="form-floating"
-    [ngClass]="{ 'is-invalid': control.invalid }"
+    [ngClass]="{ 'is-invalid': control.invalid && validate }"
   >
     @switch (inputType) {
       @case ('input') {
         <input
-          data-testid="{controlName}"
+          [attr.data-testid]="controlName"
           placeholder="Input"
           class="form-control"
           (blur)="onTouchedFn()"
@@ -22,8 +22,8 @@
           [disabled]="disabled"
           [id]="controlName"
           [ngClass]="{
-            'is-invalid': control.invalid,
-            'is-valid': control.valid && control.dirty,
+            'is-invalid': control.invalid && validate,
+            'is-valid': control.valid && control.dirty && validate,
           }"
           [ngModelOptions]="{ standalone: true }"
           [type]="formType"
@@ -39,8 +39,8 @@
           [disabled]="disabled"
           [id]="controlName"
           [ngClass]="{
-            'is-invalid': control.invalid,
-            'is-valid': control.valid && control.dirty,
+            'is-invalid': control.invalid && validate,
+            'is-valid': control.valid && control.dirty && validate,
           }"
           [ngModelOptions]="{ standalone: true }"
         >
