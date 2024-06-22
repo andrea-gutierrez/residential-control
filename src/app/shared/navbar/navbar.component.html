@@ -1,21 +1,48 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
+<nav
+  class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body"
+  data-bs-theme="dark"
+>
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Control Residencial</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pruebaTest"
-            aria-controls="pruebaTest" aria-expanded="false" aria-label="Toggle navigation">
+    <a
+      class="navbar-brand"
+      href="#"
+      >Control Residencial</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#pruebaTest"
+      aria-controls="pruebaTest"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="pruebaTest">
+    <div
+      class="collapse navbar-collapse"
+      id="pruebaTest"
+    >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         @for (link of menuList; track link.name) {
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLinkActive="active"
-               [routerLink]="link.url">{{ link.name }}</a>
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLinkActive="active"
+              [routerLink]="link.url"
+              >{{ link.name }}</a
+            >
           </li>
         }
       </ul>
       <div class="d-flex">
-        <button class="btn btn-secondary" (click)="onLogout()">Logout</button>
+        <button
+          class="btn btn-secondary"
+          (click)="onLogout()"
+        >
+          Logout
+        </button>
       </div>
     </div>
   </div>

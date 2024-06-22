@@ -12,7 +12,7 @@
   "importOrder": [
     "^@angular/(.*)$",
     "<THIRD_PARTY_MODULES>",
-    "^@environments/(.*)$",
+    "^@environment/(.*)$",
     "^@shared/(.*)$",
     "^[./]"
   ],

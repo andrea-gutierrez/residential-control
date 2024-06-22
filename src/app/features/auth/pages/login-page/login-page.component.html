@@ -1,8 +1,19 @@
-<form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()" class="login-body">
+<form
+  autocomplete="off"
+  [formGroup]="loginForm"
+  (ngSubmit)="login()"
+  class="login-body"
+>
   <div class="input-group has-validation mb-3">
     <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
     <div class="form-floating">
-      <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="name@example.com"
+        formControlName="email"
+      />
       <label for="email">Email address</label>
     </div>
   </div>
@@ -10,23 +21,55 @@
   <div class="input-group has-validation mb-3">
     <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
     <div class="form-floating">
-      <input type="password" class="form-control" id="password" placeholder="xxxxxx" formControlName="password">
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="xxxxxx"
+        formControlName="password"
+      />
       <label for="password">Password</label>
     </div>
   </div>
   <div class="form-check">
-    <input class="form-check-input" value="owner" formControlName="role" type="radio" name="role" id="owner">
-    <label class="form-check-label" for="owner">
+    <input
+      class="form-check-input"
+      value="owner"
+      formControlName="role"
+      type="radio"
+      name="role"
+      id="owner"
+    />
+    <label
+      class="form-check-label"
+      for="owner"
+    >
       Owner
     </label>
   </div>
 
   <div class="form-check">
-    <input class="form-check-input" value="admin" formControlName="role" type="radio" name="role" id="admin" checked>
-    <label class="form-check-label" for="admin">
+    <input
+      class="form-check-input"
+      value="admin"
+      formControlName="role"
+      type="radio"
+      name="role"
+      id="admin"
+      checked
+    />
+    <label
+      class="form-check-label"
+      for="admin"
+    >
       Administrator
     </label>
   </div>
-  <button type="submit" class="btn btn-primary mt-3" [disabled]="loginForm.invalid">Login</button>
+  <button
+    type="submit"
+    class="btn btn-primary mt-3"
+    [disabled]="loginForm.invalid"
+  >
+    Login
+  </button>
 </form>
-

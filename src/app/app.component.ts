@@ -1,24 +1,25 @@
-import {Component, computed, effect, inject} from '@angular/core';
-import {Router, RouterOutlet} from '@angular/router';
+import { Component, computed, effect, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 
-import {NgxSpinnerComponent} from "ngx-spinner";
+import { NgxSpinnerComponent } from 'ngx-spinner';
 
-import {NavbarComponent} from "@shared/navbar/navbar.component";
+import { NavbarComponent } from '@shared/navbar/navbar.component';
 
-import {AuthService} from "./features/auth/services/auth.service";
-
-import {AuthStatus} from "./features/auth/interfaces";
-
-import {
-  ResidentialUnitComponent
-} from './features/residentialUnitAdministrator/residential-unit/residential-unit.component';
+import { AuthStatus } from './features/auth/interfaces';
+import { AuthService } from './features/auth/services/auth.service';
+import { ResidentialUnitComponent } from './features/residentialUnitAdministrator/residential-unit/residential-unit.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ResidentialUnitComponent, NavbarComponent, NgxSpinnerComponent],
+  imports: [
+    RouterOutlet,
+    ResidentialUnitComponent,
+    NavbarComponent,
+    NgxSpinnerComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   private authService = inject(AuthService);

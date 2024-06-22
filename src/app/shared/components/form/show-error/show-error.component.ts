@@ -1,21 +1,23 @@
-import {AbstractControl} from "@angular/forms";
-import {Component, DoCheck, Input} from '@angular/core';
-import {NgIf} from "@angular/common";
+import { NgIf } from '@angular/common';
+import { Component, DoCheck, Input } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
-import {errorMessages} from "@shared/dictionary/error-message/errorMessage";
+import { errorMessages } from '@shared/dictionary/error-message/errorMessage';
 
 @Component({
   selector: 'shared-show-error-form',
   standalone: true,
-  imports: [
-    NgIf
-  ],
+  imports: [NgIf],
   templateUrl: './show-error.component.html',
-  styleUrl: 'show-error.component.scss'
+  styleUrl: 'show-error.component.scss',
 })
 export class ShowErrorComponent implements DoCheck {
-  @Input({required: false}) errorLimits?: { min?: number, max?: number, length?: number };
-  @Input({required: true}) control: AbstractControl | null = null;
+  @Input({ required: false }) errorLimits?: {
+    min?: number;
+    max?: number;
+    length?: number;
+  };
+  @Input({ required: true }) control: AbstractControl | null = null;
 
   public errorMessage = '';
 
@@ -33,7 +35,10 @@ export class ShowErrorComponent implements DoCheck {
       case 'onlyLetter':
         return errorMessages.onlyLetter;
       case 'stringRangeLength':
-        return errorMessages.stringRangeLength(this.errorLimits?.min, this.errorLimits?.max);
+        return errorMessages.stringRangeLength(
+          this.errorLimits?.min,
+          this.errorLimits?.max
+        );
       case 'minlength':
         return errorMessages.minlength(this.errorLimits?.min);
       case 'isNumber':

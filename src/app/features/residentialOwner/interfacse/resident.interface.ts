@@ -15,4 +15,3 @@ export interface Resident {
   qrId: string;
   isActive: boolean;
 }
-

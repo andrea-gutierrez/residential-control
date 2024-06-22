@@ -1,13 +1,18 @@
-import {ApplicationConfig, importProvidersFrom} from '@angular/core';
-import {provideRouter} from '@angular/router';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  provideHttpClient,
+} from '@angular/common/http';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideClientHydration } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 
-import {routes} from './app.routes';
-import {provideClientHydration} from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient} from "@angular/common/http";
-import {ErrorHandlerInterceptor} from "./core/interceptors/error-handler-interceptor.service";
-import {LoadingHandlerInterceptor} from "./core/interceptors/loading-handler.interceptor";
-import {NgxSpinnerModule} from "ngx-spinner";
-import {provideAnimations} from "@angular/platform-browser/animations";
+import { NgxSpinnerModule } from 'ngx-spinner';
+
+import { routes } from './app.routes';
+import { ErrorHandlerInterceptor } from './core/interceptors/error-handler-interceptor.service';
+import { LoadingHandlerInterceptor } from './core/interceptors/loading-handler.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,12 +24,12 @@ export const appConfig: ApplicationConfig = {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingHandlerInterceptor,
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 };

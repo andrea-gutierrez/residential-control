@@ -2,9 +2,10 @@ export const errorMessages = {
   required: 'Requerido',
   specialCharacter: 'No puede contener caracteres especiales',
   onlyLetter: 'No puede contener números',
-  stringRangeLength: (min = 1, max = 5) => `El número de caracteres debe estar entre ${min} y ${max}`,
+  stringRangeLength: (min = 1, max = 5) =>
+    `El número de caracteres debe estar entre ${min} y ${max}`,
   minlength: (length = 1) => `Debe contener al menos ${length} caracteres`,
   isNumber: 'Debe contener solo números',
   email: 'El formato es inválido',
-  stringLength: (length = 1) => `Debe ser de ${length} caracteres`
-}
+  stringLength: (length = 1) => `Debe ser de ${length} caracteres`,
+};

@@ -1,17 +1,20 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
-import {JsonPipe} from "@angular/common";
+import { JsonPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    JsonPipe
-  ],
+  imports: [ReactiveFormsModule, JsonPipe],
   templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.scss'
+  styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
   private fb = inject(FormBuilder);
@@ -25,13 +28,12 @@ export class LoginPageComponent {
   });
 
   login() {
-    const {email, password, role} = this.loginForm.value;
-    this.authService.login(email, password, role).subscribe
-    ({
+    const { email, password, role } = this.loginForm.value;
+    this.authService.login(email, password, role).subscribe({
       next: () => {
         this.onNavigate(role);
-      }
-    })
+      },
+    });
   }
 
   onNavigate(role: string): void {

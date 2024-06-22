@@ -1,10 +1,18 @@
-import {Component, inject, Input} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {ShowErrorComponent} from "@shared/components/form/show-error/show-error.component";
-import {NgClass, NgForOf} from "@angular/common";
-import {DocumentType, DocumentTypeMapping} from "../../../../shared/enums/document.enum";
-import {InputComponent} from "../../../../shared/components/form/input/input.component";
+import { NgClass, NgForOf } from '@angular/common';
+import { Component, Input, inject } from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { InputComponent } from '@shared/components/form/input/input.component';
+import { ShowErrorComponent } from '@shared/components/form/show-error/show-error.component';
+import { DocumentType, DocumentTypeMapping } from '@shared/enums/document.enum';
 
 @Component({
   standalone: true,
@@ -16,20 +24,22 @@ import {InputComponent} from "../../../../shared/components/form/input/input.com
     InputComponent,
   ],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.scss'
+  styleUrl: './form.component.scss',
 })
 export class FormComponent {
-  @Input({required: true}) modalTitle!: string;
+  @Input({ required: true }) modalTitle!: string;
 
   public activeModal = inject(NgbActiveModal);
 
-  protected readonly documentLengthRange = {min: 8, max: 10};
-  protected readonly documentTypeList = Object.values(DocumentType).map(document => {
-    return {
-      id: document,
-      value: DocumentTypeMapping[document]
+  protected readonly documentLengthRange = { min: 8, max: 10 };
+  protected readonly documentTypeList = Object.values(DocumentType).map(
+    document => {
+      return {
+        id: document,
+        value: DocumentTypeMapping[document],
+      };
     }
-  });
+  );
 
   public form: FormGroup = new FormGroup({
     apartment: new FormControl('', [Validators.required]),
@@ -96,5 +106,4 @@ export class FormComponent {
   onSave(): void {
     console.log(this.form.value);
   }
-
 }

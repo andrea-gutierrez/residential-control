@@ -1,40 +1,67 @@
 <div class="input-group has-validation mb-3">
-  <span class="input-group-text"><i class="fa-solid" [ngClass]="iconClass"></i></span>
-  <div class="form-floating" [ngClass]="{'is-invalid': control.invalid}">
+  <span class="input-group-text"
+    ><i
+      class="fa-solid"
+      [ngClass]="iconClass"
+    ></i
+  ></span>
+  <div
+    class="form-floating"
+    [ngClass]="{ 'is-invalid': control.invalid }"
+  >
     @switch (inputType) {
-    @case ('input') {
-    <input data-testid="{controlName}" placeholder="Input" class="form-control"
-           (blur)="onTouchedFn()"
-           (change)="onChange()"
-           (input)="onChange()"
-           [(ngModel)]="data"
-           [disabled]="disabled"
-           [id]="controlName"
-           [ngClass]="{'is-invalid': control.invalid, 'is-valid': control.valid && control.dirty}"
-           [ngModelOptions]="{standalone: true}"
-           [type]="formType"
-    >
-    }
-    @case ('select') {
-    <select data-testid="documentType" class="form-select"
-            (blur)="onChange()"
-            (change)="onChange()"
-            [(ngModel)]="data"
-            [disabled]="disabled"
-            [id]="controlName"
-            [ngClass]="{'is-invalid': control.invalid, 'is-valid': control.valid && control.dirty}"
-            [ngModelOptions]="{standalone: true}"
-    >
-      <option value="" selected>Selecciona un valor</option>
-      @for (option of options; track option.id) {
-      <option [value]="option.id">{{ option.value }}</option>
+      @case ('input') {
+        <input
+          data-testid="{controlName}"
+          placeholder="Input"
+          class="form-control"
+          (blur)="onTouchedFn()"
+          (change)="onChange()"
+          (input)="onChange()"
+          [(ngModel)]="data"
+          [disabled]="disabled"
+          [id]="controlName"
+          [ngClass]="{
+            'is-invalid': control.invalid,
+            'is-valid': control.valid && control.dirty,
+          }"
+          [ngModelOptions]="{ standalone: true }"
+          [type]="formType"
+        />
       }
-    </select>
+      @case ('select') {
+        <select
+          data-testid="documentType"
+          class="form-select"
+          (blur)="onChange()"
+          (change)="onChange()"
+          [(ngModel)]="data"
+          [disabled]="disabled"
+          [id]="controlName"
+          [ngClass]="{
+            'is-invalid': control.invalid,
+            'is-valid': control.valid && control.dirty,
+          }"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option
+            value=""
+            selected
+          >
+            Selecciona un valor
+          </option>
+          @for (option of options; track option.id) {
+            <option [value]="option.id">{{ option.value }}</option>
+          }
+        </select>
+      }
     }
-    }
-    <label [for]="controlName" class="form-label">{{ label }}
+    <label
+      [for]="controlName"
+      class="form-label"
+      >{{ label }}
       @if (control.hasError('required')) {
-      <span class="text-danger fw-bold">*</span>
+        <span class="text-danger fw-bold">*</span>
       }
     </label>
   </div>

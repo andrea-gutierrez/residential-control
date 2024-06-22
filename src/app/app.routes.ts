@@ -1,19 +1,19 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 
-import {Role} from '@shared/enums/roles.interface';
+import { Role } from '@shared/enums/roles.interface';
 
-import {isAuthenticatedGuard, isNotAuthenticatedGuard} from "./features/auth/guards";
-import {isAuthorizedGuard} from "./features/auth/guards/is-authorized.guard";
-
-import {AdminLayoutComponent} from "./features/admin/layouts/admin-layout/admin-layout.component";
-import {AuthLayoutComponent} from "./features/auth/layouts/auth-layout/auth-layout.component";
-import {HomeLayoutComponent} from "./features/home/layouts/home-layout/home-layout.component";
-import {LoginPageComponent} from "./features/auth/pages/login-page/login-page.component";
-import {ResidentComponent} from "./features/residentialOwner/pages/resident/resident.component";
-import {ResidentialOwnerComponent} from "./features/admin/pages/residential-owner/residential-owner.component";
+import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admin-layout.component';
+import { ResidentialOwnerComponent } from './features/admin/pages/residential-owner/residential-owner.component';
 import {
-  ResidentialOwnerLayoutComponent
-} from "./features/residentialOwner/layouts/residential-owner-layout/residential-owner-layout.component";
+  isAuthenticatedGuard,
+  isNotAuthenticatedGuard,
+} from './features/auth/guards';
+import { isAuthorizedGuard } from './features/auth/guards/is-authorized.guard';
+import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-layout.component';
+import { LoginPageComponent } from './features/auth/pages/login-page/login-page.component';
+import { HomeLayoutComponent } from './features/home/layouts/home-layout/home-layout.component';
+import { ResidentialOwnerLayoutComponent } from './features/residentialOwner/layouts/residential-owner-layout/residential-owner-layout.component';
+import { ResidentComponent } from './features/residentialOwner/pages/resident/resident.component';
 
 export const routes: Routes = [
   {
@@ -21,36 +21,36 @@ export const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate: [isAuthenticatedGuard, isAuthorizedGuard],
     data: {
-      roles: [Role.ADMIN]
+      roles: [Role.ADMIN],
     },
     children: [
       {
         path: 'residential-owner',
-        component: ResidentialOwnerComponent
+        component: ResidentialOwnerComponent,
       },
       {
         path: '**',
-        redirectTo: 'residential-owner'
-      }
-    ]
+        redirectTo: 'residential-owner',
+      },
+    ],
   },
   {
     path: 'owner',
     component: ResidentialOwnerLayoutComponent,
     canActivate: [isAuthenticatedGuard, isAuthorizedGuard],
     data: {
-      roles: [Role.OWNER]
+      roles: [Role.OWNER],
     },
     children: [
       {
         path: 'resident',
-        component: ResidentComponent
+        component: ResidentComponent,
       },
       {
         path: '**',
-        redirectTo: 'resident'
-      }
-    ]
+        redirectTo: 'resident',
+      },
+    ],
   },
   {
     path: 'auth',
@@ -59,13 +59,13 @@ export const routes: Routes = [
     children: [
       {
         path: 'login',
-        component: LoginPageComponent
+        component: LoginPageComponent,
       },
       {
         path: '**',
-        redirectTo: 'login'
-      }
-    ]
+        redirectTo: 'login',
+      },
+    ],
   },
   {
     path: 'home',
@@ -73,6 +73,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'auth'
-  }
+    redirectTo: 'auth',
+  },
 ];

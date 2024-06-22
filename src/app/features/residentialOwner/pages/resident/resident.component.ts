@@ -1,26 +1,24 @@
-import {Component, inject} from '@angular/core';
+import { Component, inject } from '@angular/core';
 
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import {FormActions} from "@shared/interfaces/formActions.enum";
+import { FormActions } from '@shared/interfaces/formActions.enum';
 
-import {FormComponent} from "../../components/form/form.component";
-import {Resident} from "../../interfacse/resident.interface";
+import { FormComponent } from '../../components/form/form.component';
+import { Resident } from '../../interfacse/resident.interface';
 
 @Component({
   standalone: true,
   imports: [],
   templateUrl: './resident.component.html',
-  styleUrl: './resident.component.scss'
+  styleUrl: './resident.component.scss',
 })
 export class ResidentComponent {
   private modalService = inject(NgbModal);
 
   protected readonly FormActions = FormActions;
 
-  loadResident(): void {
-
-  }
+  loadResident(): void {}
 
   onOpenFormModal(action: FormActions, residentInfo?: Resident): void {
     const modalRef = this.modalService.open(FormComponent, {

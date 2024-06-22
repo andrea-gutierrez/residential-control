@@ -1,9 +1,17 @@
 <div class="modal-header">
   <h2 class="modal-title text-primary">{{ modalTitle }}</h2>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
+  <button
+    (click)="activeModal.close()"
+    aria-label="Close"
+    class="btn-close"
+    type="button"
+  ></button>
 </div>
 <div class="modal-body margin-form">
-  <form [formGroup]="form" autocomplete="off">
+  <form
+    [formGroup]="form"
+    autocomplete="off"
+  >
     <shared-form-input
       controlName="name"
       formControlName="name"
@@ -12,7 +20,7 @@
       inputType="input"
       label="Nombre"
     >
-      <shared-show-error-form [control]="name"/>
+      <shared-show-error-form [control]="name" />
     </shared-form-input>
 
     <shared-form-input
@@ -23,7 +31,7 @@
       inputType="input"
       label="Apellido"
     >
-      <shared-show-error-form [control]="lastname"/>
+      <shared-show-error-form [control]="lastname" />
     </shared-form-input>
 
     <shared-form-input
@@ -34,7 +42,7 @@
       inputType="select"
       label="Tipo de documento"
     >
-      <shared-show-error-form [control]="documentType"/>
+      <shared-show-error-form [control]="documentType" />
     </shared-form-input>
 
     <shared-form-input
@@ -45,7 +53,10 @@
       inputType="input"
       label="Documento"
     >
-      <shared-show-error-form [control]="document" [errorLimits]="documentLengthRange"/>
+      <shared-show-error-form
+        [control]="document"
+        [errorLimits]="documentLengthRange"
+      />
     </shared-form-input>
 
     <shared-form-input
@@ -56,7 +67,7 @@
       inputType="input"
       label="Correo"
     >
-      <shared-show-error-form [control]="email"/>
+      <shared-show-error-form [control]="email" />
     </shared-form-input>
 
     <shared-form-input
@@ -67,7 +78,7 @@
       inputType="input"
       label="Password"
     >
-      <shared-show-error-form [control]="password"/>
+      <shared-show-error-form [control]="password" />
     </shared-form-input>
 
     <shared-form-input
@@ -77,7 +88,10 @@
       inputType="input"
       label="Celular"
     >
-      <shared-show-error-form [control]="phone" [errorLimits]="{length: 10}"/>
+      <shared-show-error-form
+        [control]="phone"
+        [errorLimits]="{ length: 10 }"
+      />
     </shared-form-input>
 
     <shared-form-input
@@ -88,7 +102,7 @@
       inputType="input"
       label="Torre"
     >
-      <shared-show-error-form [control]="tower"/>
+      <shared-show-error-form [control]="tower" />
     </shared-form-input>
 
     <shared-form-input
@@ -99,7 +113,7 @@
       inputType="input"
       label="Apartamento"
     >
-      <shared-show-error-form [control]="apartment"/>
+      <shared-show-error-form [control]="apartment" />
     </shared-form-input>
 
     <shared-form-input
@@ -109,7 +123,7 @@
       inputType="input"
       label="Placa"
     >
-      <shared-show-error-form [control]="plate"/>
+      <shared-show-error-form [control]="plate" />
     </shared-form-input>
 
     <shared-form-input
@@ -119,14 +133,18 @@
       inputType="input"
       label="Tipo de vehiculo"
     >
-      <shared-show-error-form [control]="vehicleType"/>
+      <shared-show-error-form [control]="vehicleType" />
     </shared-form-input>
-
   </form>
 </div>
 
 <div class="modal-footer">
-  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="onSave()">
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="form.invalid"
+    (click)="onSave()"
+  >
     Guardar
   </button>
 </div>
