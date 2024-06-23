@@ -13,6 +13,7 @@
     "^@angular/(.*)$",
     "<THIRD_PARTY_MODULES>",
     "^@environment/(.*)$",
+    "^@core/(.*)$",
     "^@shared/(.*)$",
     "^[./]"
   ],
