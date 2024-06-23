@@ -4,37 +4,33 @@
   (ngSubmit)="login()"
   class="login-body"
 >
-  <div class="input-group has-validation mb-3">
-    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-    <div class="form-floating">
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        placeholder="name@example.com"
-        formControlName="email"
-      />
-      <label for="email">Email address</label>
-    </div>
-  </div>
+  <shared-form-input
+    controlName="email"
+    formControlName="email"
+    formType="text"
+    iconClass="fa-envelope"
+    inputType="input"
+    label="Correo"
+  >
+    <shared-show-error-form [control]="email" />
+  </shared-form-input>
 
-  <div class="input-group has-validation mb-3">
-    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-    <div class="form-floating">
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        placeholder="xxxxxx"
-        formControlName="password"
-      />
-      <label for="password">Password</label>
-    </div>
-  </div>
+  <shared-form-input
+    controlName="password"
+    formControlName="password"
+    formType="password"
+    iconClass="fa-lock"
+    inputType="input"
+    label="Contraseña"
+  >
+    <shared-show-error-form [control]="password" />
+  </shared-form-input>
+
+  <p>Perfil:</p>
   <div class="form-check">
     <input
       class="form-check-input"
-      value="owner"
+      [value]="Role.OWNER"
       formControlName="role"
       type="radio"
       name="role"
@@ -44,14 +40,14 @@
       class="form-check-label"
       for="owner"
     >
-      Owner
+      Dueño del apartamento
     </label>
   </div>
 
   <div class="form-check">
     <input
       class="form-check-input"
-      value="admin"
+      [value]="Role.ADMIN"
       formControlName="role"
       type="radio"
       name="role"
@@ -62,7 +58,7 @@
       class="form-check-label"
       for="admin"
     >
-      Administrator
+      Administrador de la unidad
     </label>
   </div>
   <button
