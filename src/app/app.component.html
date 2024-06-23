@@ -1,3 +1,6 @@
+@if (isAuthenticated) {
+  <shared-navbar [menuList]="menuList"></shared-navbar>
+}
 @if (finishAuthCheck()) {
   <router-outlet></router-outlet>
 }

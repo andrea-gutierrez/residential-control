@@ -1,10 +1,11 @@
-import {computed, Injectable, signal} from '@angular/core';
-import {Observable, of} from "rxjs";
+import { Injectable, computed, signal } from '@angular/core';
 
-import {AuthStatus, User} from "../interfaces";
+import { Observable, of } from 'rxjs';
+
+import { AuthStatus, User } from '../interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private _currentUser = signal<User | null>(null);
@@ -35,7 +36,7 @@ export class AuthService {
 
   login(_email: string, _password: string, role: string): Observable<boolean> {
     this.setCurrentUser({
-      roles: [role]
+      roles: [role],
     });
     return of(true);
   }
@@ -47,7 +48,7 @@ export class AuthService {
     return of(true);
   }
 
-  checkAuthStatus(): Observable<Boolean> {
+  checkAuthStatus(): Observable<boolean> {
     if (!this.isLocalStorageAvailable) return of(true);
 
     const token = localStorage.getItem('token');

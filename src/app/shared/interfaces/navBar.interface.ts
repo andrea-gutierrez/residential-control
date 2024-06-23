@@ -1,4 +1,7 @@
 export interface NavBar {
-  name: string;
-  url: string;
+  role: string;
+  item: {
+    name: string;
+    url: string;
+  }[];
 }

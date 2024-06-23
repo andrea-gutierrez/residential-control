@@ -2,7 +2,8 @@ import { NgForOf } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
-import { AuthService } from '../../features/auth/services/auth.service';
+import { AuthService } from '@core/auth/services/auth.service';
+
 import { NavBar } from '../interfaces/navBar.interface';
 
 @Component({
@@ -13,7 +14,7 @@ import { NavBar } from '../interfaces/navBar.interface';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  @Input({ required: true }) menuList: NavBar[] = [];
+  @Input({ required: true }) menuList!: NavBar;
 
   private authService = inject(AuthService);
   private router = inject(Router);
