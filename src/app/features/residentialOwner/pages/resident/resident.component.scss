@@ -1,0 +1,7 @@
+.table--hover {
+  &:hover {
+    th, td {
+      background-color: rgb(125, 164, 207, 0.6);
+    }
+  }
+}
