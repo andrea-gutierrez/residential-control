@@ -24,7 +24,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() disabled = false;
   @Input() formType: string = '';
   @Input() options: { id: string; value: string }[] = [];
-  @Input() validate = false;
+  @Input() validate = true;
 
   public onChangeFn = (_: any) => {};
 
