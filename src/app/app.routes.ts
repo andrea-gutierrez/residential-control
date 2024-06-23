@@ -11,10 +11,8 @@ import { LoginPageComponent } from '@core/auth/pages/login-page/login-page.compo
 import { Role } from '@shared/enums/roles.interface';
 
 import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admin-layout.component';
-import { ResidentialOwnerComponent } from './features/admin/pages/residential-owner/residential-owner.component';
 import { HomeLayoutComponent } from './features/home/layouts/home-layout/home-layout.component';
 import { ResidentialOwnerLayoutComponent } from './features/residentialOwner/layouts/residential-owner-layout/residential-owner-layout.component';
-import { ResidentComponent } from './features/residentialOwner/pages/resident/resident.component';
 
 export const routes: Routes = [
   {
@@ -24,16 +22,8 @@ export const routes: Routes = [
     data: {
       roles: [Role.ADMIN],
     },
-    children: [
-      {
-        path: 'residential-owner',
-        component: ResidentialOwnerComponent,
-      },
-      {
-        path: '**',
-        redirectTo: 'residential-owner',
-      },
-    ],
+    loadChildren: () =>
+      import('./features/admin/admin.routes').then(m => m.ADMIN_ROUTES),
   },
   {
     path: 'owner',
@@ -42,16 +32,10 @@ export const routes: Routes = [
     data: {
       roles: [Role.OWNER],
     },
-    children: [
-      {
-        path: 'resident',
-        component: ResidentComponent,
-      },
-      {
-        path: '**',
-        redirectTo: 'resident',
-      },
-    ],
+    loadChildren: () =>
+      import('./features/residentialOwner/residentialOwner.route').then(
+        m => m.RESIDENTIAL_OWNER_ROUTES
+      ),
   },
   {
     path: 'auth',
